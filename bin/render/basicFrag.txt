@@ -1,0 +1,40 @@
+#version 150
+# Phong Shading
+
+in vec3 vertPos;
+in vec3 normalInterp;
+
+uniform vec3 lightPosition[3];
+uniform vec3 ambiant;
+uniform vec3 diffuse;
+uniform vec3 spec;
+uniform int mode;
+
+uniform float emissivity; //shininess
+
+out vec4 fclr;
+
+void main() {
+
+	vec3 total;
+
+	for (int i = 0; i < 3; i++){
+	  vec3 normal = normalize(normalInterp); 
+	  vec3 lightDir = normalize(lightPosition[i] - vertPos);
+
+	  float lambertian = max(dot(lightDir,normal), 0.0);
+	  float specular = 0.0;
+
+	  if(lambertian > 0.0) {
+		vec3 reflectDir = reflect(-lightDir, normal);
+		vec3 viewDir = normalize(-vertPos);	 
+
+		float specAngle = max(dot(reflectDir, viewDir), 0.0);
+		specular = pow(specAngle, emissivity);//phong shading
+		}
+
+		total += lambertian*diffuse + specular*spec;
+	  }
+
+  fclr = vec4(vec3(1.0)*(ambiant*diffuse + total), 1.0);
+};

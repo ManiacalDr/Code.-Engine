@@ -1,0 +1,14 @@
+scene files will be used to store map information
+
+Important is that it needs to store some information for where sprites are in the scene, so this needs:
+
+Position
+rotation
+scale
+
+Color (for tinting)
+
+bool value for collision
+collision information
+
+name of the sprite

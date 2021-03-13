@@ -1,0 +1,20 @@
+#version 150
+# Phong Shading
+
+in vec3 vPosition;
+in vec3 vNormal;
+
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
+uniform mat4 normalmat;
+
+out vec3 normalInterp;
+out vec3 vertPos;
+
+void main(){
+	gl_Position = proj * view * model * vec4(vPosition, 1.0);
+	vec4 vertPos4 = model * vec4(vPosition, 1.0);
+    vertPos = vec3(vertPos4);
+    normalInterp = vec3(normalmat * vec4(vNormal, 0.0));
+};
