@@ -8,3 +8,13 @@ C:\Users\alexb\source\repos\GameLoop\GameLoop\obj\Debug\GameLoop.csproj.Generate
 C:\Users\alexb\source\repos\GameLoop\GameLoop\obj\Debug\GameLoop.csproj.CoreCompileInputs.cache
 C:\Users\alexb\source\repos\GameLoop\GameLoop\obj\Debug\GameLoop.exe
 C:\Users\alexb\source\repos\GameLoop\GameLoop\obj\Debug\GameLoop.pdb
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\bin\Debug\GameLoop.exe.config
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\bin\Debug\GameLoop.exe
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\bin\Debug\GameLoop.pdb
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.csprojAssemblyReference.cache
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.Form1.resources
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.Properties.Resources.resources
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.csproj.GenerateResource.cache
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.csproj.CoreCompileInputs.cache
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.exe
+C:\Users\alcal\source\repos\Code.-Engine\GameLoop\GameLoop\obj\Debug\GameLoop.pdb
