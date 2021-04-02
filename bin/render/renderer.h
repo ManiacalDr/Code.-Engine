@@ -15,7 +15,6 @@
 #include <common/textureshader.hpp>
 
 #include<GL/glu.h>
-using namespace glm;
 #define reportError(s) _ReportError(__LINE__, (s))
 
 class Renderer
@@ -28,12 +27,21 @@ public:
 
 private:
 	GLuint VBO, VAO;
-	GLuint programID;
-	GLuint texture;
+	GLuint ProgramID;
+	GLuint texture[16];
+	GLuint MVP;
+	glm::vec3 cam = glm::vec3(0.0,0.0,-0.1);
+	glm::mat4 mvp;
 
 	GLFWwindow* window;
 
+	int numTextures = 1;
+
 	void initialize();
+
+	void processFile(const std::string file);
+
+	void updateCam(glm::mat4 update);
 
 	float vertices[30] = {
 		// positions         // texture coords

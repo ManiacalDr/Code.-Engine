@@ -14,6 +14,7 @@ class Sprite : public Object
 public:
 	Sprite();
 	~Sprite();
+	Sprite(std::string n) { name = n; }
 
 private:
 	std::string name;
