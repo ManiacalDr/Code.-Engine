@@ -2,25 +2,13 @@ scene files will be used to store map information
 
 Important is that it needs to store some information for where sprites are in the scene, so this needs:
 
-Header:
-What animations will be used in this scene
-What textures are in a scene
-
 Position
 rotation
 scale
 
-bool for if colored
 Color (for tinting)
 
 bool value for collision
 collision information
-position 
-rotation 
-scale
-size?
 
 name of the sprite
-
-group
-groupend

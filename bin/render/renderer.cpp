@@ -3,7 +3,6 @@
 #include "stb_image.h"
 
 #include "renderer.h"
-#include "sprite.h"
 
 void _ReportError(int ln, const std::string str) {
 	GLuint err = glGetError();
@@ -42,17 +41,17 @@ void Renderer::initialize() {
 
 	reportError("data");
 
-	ProgramID = LoadShaders("shadervertex.txt", "shaderfragment.txt");
+	programID = LoadShaders("shadervertex.txt", "shaderfragment.txt");
 	reportError("shader");
 
 	GLuint pos, texCoord;
 	// position attribute
-	pos = glGetAttribLocation(ProgramID, "aPos");
+	pos = glGetAttribLocation(programID, "aPos");
 	if (pos < 0) std::cerr << "couldn't find vPosition in shader\n";
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(pos);
 	// texture coord attribute
-	texCoord = glGetAttribLocation(ProgramID, "aTexCoord");
+	texCoord = glGetAttribLocation(programID, "aTexCoord");
 	if (texCoord < 0) std::cerr << "couldn't find texCoord in shader\n";
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(texCoord);
@@ -61,11 +60,6 @@ void Renderer::initialize() {
 	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 	glDepthFunc(GL_LESS); // depth-testing interprets a smaller value as "closer"
 	reportError("init");
-}
-
-void Renderer::updateCam(glm::mat4 update)
-{
-	cam = update * cam;
 }
 
 Renderer::Renderer()
@@ -110,10 +104,8 @@ Renderer::Renderer()
 	std::cout << "Running OpenGL Version " << glGetString(GL_VERSION)
 		<< " using " << glGetString(GL_RENDERER) << "\n";
 
-
-	// Gen and bind textures
-	glGenTextures(16, &texture[0]);
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// set the texture wrapping/filtering options (on the currently bound texture object)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -123,8 +115,7 @@ Renderer::Renderer()
 
 	// load and generate the texture (This is going to be called for every sprite we plan to use)
 	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load("failed.jpg", &width, &height, &nrChannels, 3);
+	unsigned char *data = stbi_load("container.jpg", &width, &height, &nrChannels, 3);
 	if (data)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
@@ -135,30 +126,18 @@ Renderer::Renderer()
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
-	reportError("TextureLoad");
 
 	initialize();
 
 
 	glfwSetKeyCallback(window, KeyboardCB);//must be called after creating window
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);//must be called after creating window
+	//glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);//must be called after creating window
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
-	glUseProgram(ProgramID);
-	glUniform1i(glGetUniformLocation(ProgramID, "atexture"), 0);
-	glUniform3f(glGetUniformLocation(ProgramID, "aColor"), 1.0f, 1.0f, 1.0f);
-	MVP = glGetUniformLocation(ProgramID, "mvp");
-
-	glm::mat4 p = glm::ortho(-(1080.0f / 2.0f), 1080.0f / 2.0f,
-		768.0f / 2.0f, -(768.0f / 2.0f),
-		-1000.0f, 1000.0f);
-	glm::mat4 v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z+10)), glm::vec3(0.0, 1.0, 0.0));
-	glm::mat4 m = glm::scale(glm::mat4(1.0), glm::vec3(500.0f,500.0f,500.0f));
-	mvp = p * v * m;
-
-	glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
-
+	glUseProgram(programID);
+	glUniform1i(glGetUniformLocation(programID, "atexture"), 0);
+	glUniform3f(glGetUniformLocation(programID, "aColor"), 1.0f, 1.0f, 1.0f);
 	reportError("First");
 }
 
@@ -167,19 +146,18 @@ void Renderer::render() {
 
 	
 	// bind Texture
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	// render 
-	glUseProgram(ProgramID);
+	glUseProgram(programID);
 	glBindVertexArray(VAO);
-
 	glDrawArrays(GL_TRIANGLES, 0,6);
 
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
 	if (glfwWindowShouldClose(window)) { finish = false; }
-	reportError("render");
+	//reportError("render");
 }
 
 Renderer::~Renderer()
@@ -187,9 +165,9 @@ Renderer::~Renderer()
 	// Cleanup VBO
 	glDeleteBuffers(1, &VBO);
 	glDeleteVertexArrays(1, &VAO);
-	glDeleteProgram(ProgramID);
+	glDeleteProgram(programID);
 
 	// Close OpenGL window and terminate GLFW
-	//glfwTerminate();
+	glfwTerminate();
 	reportError("clean");
 }
