@@ -1,21 +1,24 @@
-JSONCONS_ENUM_TRAITS()
-JSONCONS_N_CTOR_GETTER_TRAITS()
-JSONCONS_ALL_CTOR_GETTER_TRAITS()
+//Made by Gregory Watts
+#ifndef SCENE_H
+#define SCENE_H
 
-#include"object.hpp"
-#include"sprite.h"
+#include <memory>
+#include <string>
+#include "object.hpp"
 
 class Scene
 {
 public:
-	Object root;
+	Object* root;
 
 	Scene();
 	~Scene();
 
 	void processFile(const std::string file);
+	void writeFile(const std::string file);
 
-	//needs to be stack or binary heap
 private:
 
 };
+
+#endif
