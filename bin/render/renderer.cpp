@@ -2,6 +2,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
+#include "windows.h"
 #include "renderer.h"
 #include "sprite.h"
 
@@ -24,16 +25,16 @@ void KeyboardCB(GLFWwindow *window, int key, int scancode, int action, int mods)
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
 	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-		Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0,Renderer::speed,0.0)));
+		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0,Renderer::speed,0.0)));
 	}
 	if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-		Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(-Renderer::speed, 0.0, 0.0)));
+		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(-Renderer::speed, 0.0, 0.0)));
 	}
 	if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-		Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -Renderer::speed, 0.0)));
+		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -Renderer::speed, 0.0)));
 	}
 	if (key == GLFW_KEY_D && action == GLFW_PRESS) {
-		Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(Renderer::speed, 0.0, 0.0)));
+		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(Renderer::speed, 0.0, 0.0)));
 	}
 }
 
@@ -303,7 +304,7 @@ void Renderer::render(Scene& scene) {
 	RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
 	RenderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
 	
-	if (mode = Renderer::GAME) {
+	if (Renderer::mode == RenderMode::GAME) {
 		glUseProgram(ProgramID);
 		// bind Texture
 		for (int i = 0; i < numTextures; i++) {
@@ -314,7 +315,7 @@ void Renderer::render(Scene& scene) {
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
 	}
-	if (mode = Renderer::EDITOR) {
+	if (Renderer::mode == RenderMode::EDITOR) {
 		glUseProgram(ProgramID);
 	}
 

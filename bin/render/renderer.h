@@ -8,6 +8,7 @@
 #include <vector>
 #include <map>
 
+#define GLEW_STATIC
 // Include GLEW. Always include it before gl.h and glfw3.h, since it's a bit magic.
 #include <GL/glew.h>
 // Include GLFW
@@ -56,7 +57,7 @@ private:
 
 	float speed = 0.5;
 	int numTextures = 1;
-	RenderMode mode = Renderer::GAME;
+	RenderMode mode = RenderMode::GAME;
 
 	void initialize();
 

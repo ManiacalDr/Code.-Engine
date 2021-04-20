@@ -2,6 +2,7 @@
 #define OBJECT_HPP
 #include <memory>
 #include <vector>
+#include "windows.h"
 #include <glm/ext.hpp>
 #include<GL/glu.h>
 
