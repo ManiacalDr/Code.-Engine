@@ -50,7 +50,7 @@ animationStateData -> setDefaultMix(0.1f);
 }
 
 //track = animation state seconds
-void addAnimation(String name, int track, bool loop, float delay)
+void addAniation(String name, int track, bool loop, float delay)
 {
     animationState->addAnimation(track,name,loop,delay);
 }
