@@ -5,14 +5,16 @@
 // We should have some form of scene graph, to allow for loading in multiple sprites.
 
 #include "renderer.h"
-using namespace glm;
+#include "scene.h"
 
 int main(){
+	Scene scene;
 	Renderer renderer;
 
 	//setup
 
 	do {
-		renderer.render();
+		//scene.update();
+		renderer.render(scene);
 	} while (renderer.finish);
 }
