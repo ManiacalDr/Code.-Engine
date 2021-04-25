@@ -26,17 +26,17 @@ void addObj(Object* previous, jsoncons::json current) {
 	Object* temp;
 
 	if (current.contains("name")) {
-		temp = new Sprite((current)["name"].as<std::string>(), glm::vec3((current)["position"][0].as<float>(), (current)["position"][1].as<float>(), (current)["position"][2].as<float>()), (current)["rotation"].as<double>(), glm::vec3((current)["scale"][0].as<float>(), (current)["scale"][1].as<float>(), (current)["scale"][1].as<float>()));
-		previous->addLink(*temp);
+		//temp = new Sprite((current)["name"].as<std::string>(), glm::vec3((current)["position"][0].as<float>(), (current)["position"][1].as<float>(), (current)["position"][2].as<float>()), (current)["rotation"].as<double>(), glm::vec3((current)["scale"][0].as<float>(), (current)["scale"][1].as<float>(), (current)["scale"][1].as<float>()));
+		//previous->addLink(*temp);
 	}
-	else if (current.contains("iscollider")) {
+	/*else if (current.contains("iscollider")) {
 		temp = new Collision( glm::vec3((current)["position"][0].as<float>(), (current)["position"][1].as<float>(), (current)["position"][2].as<float>()), (current)["rotation"].as<double>(), glm::vec3((current)["scale"][0].as<float>(), (current)["scale"][1].as<float>(), (current)["scale"][1].as<float>()));
 		previous->addLink(*temp);
 	}
 	else if (current.contains("isanimaitor")) {
 		temp = new Animator(glm::vec3((current)["position"][0].as<float>(), (current)["position"][1].as<float>(), (current)["position"][2].as<float>()), (current)["rotation"].as<double>(), glm::vec3((current)["scale"][0].as<float>(), (current)["scale"][1].as<float>(), (current)["scale"][1].as<float>()));
 		previous->addLink(*temp);
-	}
+	}*/
 
 	while (current["link"] != NULL) {
 		addObj(temp, current);
@@ -57,14 +57,14 @@ void writeNode(std::ofstream& file, Object* node) {
 	if (tmpSprite != nullptr) {
 		file << tmpSprite->writeJSON();
 	}
-	Collision* tmpCollision = dynamic_cast<Collision*>(node);
+	/*Collision* tmpCollision = dynamic_cast<Collision*>(node);
 	if (tmpCollision != nullptr) {
 		file << tmpCollision->writeJSON();
 	}
 	Animator* tmpAnimator = dynamic_cast<Animator*>(node);
 	if (tmpAnimator != nullptr) {
 		file << tmpAnimator->writeJSON();
-	}
+	}*/
 	//write links, calling writeNode
 	file << "\"link\" :[\n{\n";
 	for (std::vector<Object*>::iterator i = node->link.begin(); i != node->link.end(); i++) {

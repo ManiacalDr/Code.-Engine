@@ -1,3 +1,4 @@
+// Made by Gregory Watts
 #ifndef RENDERER_H
 #define RENDERER_H
 // Standard Libraries
@@ -7,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <boost/filesystem.hpp>
 
 #define GLEW_STATIC
 // Include GLEW. Always include it before gl.h and glfw3.h, since it's a bit magic.
@@ -20,13 +22,16 @@
 
 #include<GL/glu.h>
 #include "scene.h"
+#include "editor.h"
+#include <editor.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #define reportError(s) _ReportError(__LINE__, (s))
 
 enum class RenderMode {
 	GAME,
-	EDITOR
+	EDITOR,
+	MENU
 };
 
 struct Character {
@@ -42,30 +47,51 @@ public:
 	Renderer();
 	~Renderer();
 	void render(Scene&);
+	void updateScene(Scene&);
+
 	bool finish = true;
+	float speed = 0.5;
 	std::map<char, Character> Characters;
 
+	RenderMode getMode() {
+		return mode;
+	}
+
+	void setEditor(Editor* edi) {
+		editor = edi;
+	}
+
 private:
-	GLuint VBO, VAO, textVAO, textVBO;
-	GLuint ProgramID, TextID;
+	GLuint VBO = 0, VAO = 0, textVAO = 0, textVBO = 0;
+	GLuint ProgramID = 0, TextID = 0;
 	GLuint texture[16];
-	GLuint MVP;
-	glm::vec3 cam = glm::vec3(0.0,0.0,0.0);
-	glm::mat4 mvp;
+	glm::mat4 p = glm::mat4(1.0f);
+	glm::mat4 v = glm::mat4(1.0f);
+	GLuint MVP = 0;
+	glm::vec3 cam = glm::vec3(0.0, 0.0, 0.0);
+	glm::mat4 mvp = glm::mat4(1.0f);
+	bool pressed[GLFW_KEY_MENU];
 
-	GLFWwindow* window;
+	GLFWwindow* window = 0;
+	Editor* editor;
 
-	float speed = 0.5;
-	int numTextures = 1;
-	RenderMode mode = RenderMode::GAME;
+	RenderMode mode = RenderMode::MENU;
+
+	std::vector<Object*> objects;
+	std::vector<Object*> sprites;
+
+	void KeyboardCB(int key, int scancode, int action, int mods);
+
+	void mouse_button_callback(int button, int action, int mods);
+
+	void framebuffer_size_callback(int width, int height);
 
 	void initialize();
 
-	void updateCam(glm::mat4 update);
 	void RenderText(std::string, float, float, float, glm::vec3);
 
 	float vertices[30] = {
-		// positions         // texture coords
+		// positions         
 		 0.0f,  0.0f, 0.0f,   0.0f, 1.0f,   // top right
 		 1.0f, 1.0f, 0.0f,   1.0f, 0.0f,   // bottom right
 		1.0f, 0.0f, 0.0f,   1.0f, 1.0f,   // bottom left
@@ -73,6 +99,25 @@ private:
 		0.0f,  1.0f, 0.0f,   0.0f, 0.0f,   // top left 
 		0.0f,  0.0f, 0.0f,   0.0f, 1.0f,   // top right
 	};
+
+	static void KeyboardCB(GLFWwindow* window, int key, int scancode, int action, int mods) {
+		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+		renderer->KeyboardCB(key, scancode, action, mods);
+	}
+
+	static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+		renderer->framebuffer_size_callback(width, height);
+	}
+
+	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
+		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+		renderer->mouse_button_callback(button, action, mods);
+	}
+
+	void updateCam(glm::mat4 update);
+
 };
 
 #endif

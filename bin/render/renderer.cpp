@@ -5,6 +5,9 @@
 #include "windows.h"
 #include "renderer.h"
 #include "sprite.h"
+#include <imgui.h>
+#include <imgui_impl_glfw.h>
+#include <imgui_impl_opengl3.h>
 
 void _ReportError(int ln, const std::string str) {
 	GLuint err = glGetError();
@@ -13,33 +16,184 @@ void _ReportError(int ln, const std::string str) {
 	printf("\n******************************************\n%d: %s: GLError %d: %s\n", ln, str.c_str(), err, glerr);
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
-{
-	// make sure the viewport matches the new window dimensions; note that width and 
-	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, width, height);
+void glfwErrorCB(int error, const char* description) {
+	fputs(description, stderr);
 }
 
-void KeyboardCB(GLFWwindow *window, int key, int scancode, int action, int mods) {
+void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
+	if (key == GLFW_KEY_UNKNOWN) return; // Don't accept unknown keys
+	if (action == GLFW_PRESS)
+		pressed[key] = true;
+	else if (action == GLFW_RELEASE)
+		pressed[key] = false;
+
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS) {
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
-	if (key == GLFW_KEY_W && action == GLFW_PRESS) {
-		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0,Renderer::speed,0.0)));
+
+	switch (mode)
+	{
+	case RenderMode::GAME:
+		break;
+	case RenderMode::EDITOR:
+		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			//std::cout << "Hit W";
+			updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -speed, 0.0)));
+		}
+		if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			//std::cout << "Hit A";
+			updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(-speed, 0.0, 0.0)));
+		}
+		if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			//std::cout << "Hit S";
+			updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0, speed, 0.0)));
+		}
+		if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			//std::cout << "Hit D";
+			updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(speed, 0.0, 0.0)));
+		}
+		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
+			cam = glm::vec3(0.0);
+		}
+		break;
+	case RenderMode::MENU:
+		break;
+	default:
+		break;
 	}
-	if (key == GLFW_KEY_A && action == GLFW_PRESS) {
-		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(-Renderer::speed, 0.0, 0.0)));
+	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
+}
+
+void Renderer::mouse_button_callback(int button, int action, int mods) {
+	double xpos, ypos;
+	int width, height;
+	glfwGetCursorPos(window, &xpos, &ypos);
+	glfwGetWindowSize(window, &width, &height);
+
+	glm::mat4 inverse = glm::inverse(v * p);
+
+	glm::vec4 temp = glm::vec4((2.0f * ((float)(xpos - 0) / ((float)width))) - 1.0f, 1.0f - (2.0f * ((float)ypos / height)), 0, 1.0);
+	glm::vec3 pos = temp * inverse;
+	pos += cam;
+
+	//pos.w = 1.0 / pos.w;
+	//pos.x *= pos.w;
+	//pos.y *= pos.w;
+	//pos.z *= pos.w;
+
+	std::cout << std::endl << pos.x << " " << pos.y << std::endl;
+
+	bool spriteHit = false, objHit = false;
+	Object* sprite = new Object(), *object = new Object();
+
+	for (auto i = sprites.begin(); i != sprites.end(); i++) {
+		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
+			std::cout << "\nObject was hit\n";
+			spriteHit = true;
+			delete sprite;
+			sprite = *i;
+		}
 	}
-	if (key == GLFW_KEY_S && action == GLFW_PRESS) {
-		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -Renderer::speed, 0.0)));
+
+	for (auto i = objects.begin(); i != objects.end(); i++) {
+		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
+			std::cout << "\nObject was hit\n";
+			objHit = true;
+			delete object;
+			object = *i;
+		}
 	}
-	if (key == GLFW_KEY_D && action == GLFW_PRESS) {
-		//Renderer::updateCam(glm::translate(glm::mat4(1.0f), glm::vec3(Renderer::speed, 0.0, 0.0)));
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
+
+				switch (mode)
+				{
+				case RenderMode::GAME:
+					break;
+				case RenderMode::EDITOR:
+					if (spriteHit == true) {
+						editor->makeEditable(sprite);
+					}
+					break;
+				case RenderMode::MENU:
+					
+					break;
+				default:
+					break;
+				}
+	}
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS) {
+				switch (mode)
+				{
+				case RenderMode::GAME:
+					break;
+				case RenderMode::EDITOR:
+					if (objHit == true) {
+						if (object->ID == "Quit") {
+							finish = false;
+							break;
+						}
+						editor->makeSelection(object);
+					}
+					if (spriteHit == true) {
+						if (pressed[GLFW_KEY_LEFT_CONTROL]) {
+							auto temp = std::find(sprites.begin(), sprites.end(), sprite);
+							sprites.erase(temp);
+							editor->removeEditable();
+						}
+					}
+					else if (objHit == false && (*editor).selection != NULL && (*editor).editable == NULL) {
+						Sprite* tmpSprite = dynamic_cast<Sprite*>((*editor).selection);
+						if (tmpSprite != nullptr) {
+							sprites.emplace_back(new Sprite((*tmpSprite).name, (*tmpSprite).UV, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
+						}
+					}
+					break;
+				case RenderMode::MENU:
+					if (objHit == true) {
+						if (object->ID == "Start") mode = RenderMode::GAME;
+						if (object->ID == "Editor") {
+							mode = RenderMode::EDITOR;
+
+							// Setup Dear ImGui context
+							//IMGUI_CHECKVERSION();
+							ImGui::CreateContext();
+							ImGuiIO& io = ImGui::GetIO();
+							// Setup Platform/Renderer bindings
+							ImGui_ImplGlfw_InitForOpenGL(window, true);
+							const char* glsl_version = "#version 130";
+							ImGui_ImplOpenGL3_Init(glsl_version);
+							// Setup Dear ImGui style
+							ImGui::StyleColorsDark();
+
+							objects.clear();
+							float xpos = -480.0f;
+							int id = 0;
+
+							for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures")) {
+								std::cout << entry.path() << boost::filesystem::extension(entry.path()) << '\n';
+								if (boost::filesystem::extension(entry.path()) == ".jpg" || boost::filesystem::extension(entry.path()) == ".png") {
+									objects.emplace_back(new Sprite(entry.path().stem().string(), glm::mat2x4(1.0f), entry.path().string(), glm::vec3(xpos, -286.0f, 0.0f), 0.0f, glm::vec3(100.0f), std::to_string(id)));
+									xpos += 150.0f;
+								}
+							}
+						}
+						if (object->ID == "Quit") finish = false;
+					}
+					break;
+				default:
+					break;
+				}
 	}
 }
 
-void glfwErrorCB(int error, const char* description) {
-	fputs(description, stderr);
+void Renderer::framebuffer_size_callback(int width, int height) {
+	// make sure the viewport matches the new window dimensions; note that width and 
+	// height will be significantly larger than specified on retina displays.
+	glViewport(0, 0, width, height);
+	p = glm::ortho(-(width / 2.0f), width / 2.0f,
+		-(height / 2.0f), (height / 2.0f),
+		-1000.0f, 1000.0f);
 }
 
 void Renderer::initialize() {
@@ -55,8 +209,8 @@ void Renderer::initialize() {
 
 	reportError("data");
 
-	ProgramID = LoadShaders("shadervertex.txt", "shaderfragment.txt");
-	TextID = LoadShaders("textvertex.txt", "textfragment.txt");
+	ProgramID = LoadShaders("assets/shaders/shadervertex.txt", "assets/shaders/shaderfragment.txt");
+	TextID = LoadShaders("assets/shaders/textvertex.txt", "assets/shaders/textfragment.txt");
 	reportError("shader");
 
 	GLuint pos, texCoord;
@@ -94,6 +248,7 @@ void Renderer::initialize() {
 void Renderer::updateCam(glm::mat4 update)
 {
 	cam = glm::vec3(update * glm::vec4(cam,1.0f));
+	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
 }
 
 Renderer::Renderer()
@@ -106,7 +261,7 @@ Renderer::Renderer()
 		return; // This might need to return an error code of some sort, failed to initlize;
 	}
 
-	//glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // We want OpenGL 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL 
@@ -117,8 +272,6 @@ Renderer::Renderer()
 #endif
 
 	// Open a window and create its OpenGL context
-
-	glfwSetErrorCallback(glfwErrorCB);
 
 	window = glfwCreateWindow(1920, 1080, "Code.", NULL, NULL);
 	if (window == NULL) {
@@ -198,36 +351,23 @@ Renderer::Renderer()
 	FT_Done_Face(face);
 	FT_Done_FreeType(ft);
 
-	// Gen and bind textures
-	glGenTextures(16, &texture[0]);
-	glBindTexture(GL_TEXTURE_2D, texture[0]);
-
 	// set the texture wrapping/filtering options (on the currently bound texture object)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	// load and generate the texture (This is going to be called for every sprite we plan to use)
-	int width, height, nrChannels;
-	stbi_set_flip_vertically_on_load(true);
-	unsigned char *data = stbi_load("assets/textures/failed.jpg", &width, &height, &nrChannels, 3);
-	if (data)
-	{
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
-		glGenerateMipmap(GL_TEXTURE_2D);
-	}
-	else
-	{
-		std::cout << "Failed to load texture" << std::endl;
-	}
-	stbi_image_free(data);
-	reportError("TextureLoad");
-
 	initialize();
 
+	objects.emplace_back(new Sprite("start", glm::mat2x4(1.0f) ,"assets/textures/menu/start.png", glm::vec3(-387.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Start"));
+	objects.emplace_back(new Sprite("editor", glm::mat2x4(1.0f), "assets/textures/menu/editor.png", glm::vec3(-67.5f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Editor"));
+	objects.emplace_back(new Sprite("quit", glm::mat2x4(1.0f), "assets/textures/menu/quit.png", glm::vec3(326.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Quit"));
+
+	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, KeyboardCB);//must be called after creating window
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);//must be called after creating window
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+
 	// Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
@@ -237,18 +377,17 @@ Renderer::Renderer()
 	glUniform3f(glGetUniformLocation(ProgramID, "aColor"), 1.0f, 1.0f, 1.0f);
 	MVP = glGetUniformLocation(ProgramID, "mvp");
 
-	glm::mat4 p = glm::ortho(-(1080.0f / 2.0f), 1080.0f / 2.0f,
-		768.0f / 2.0f, -(768.0f / 2.0f),
+	p = glm::ortho(-(1080.0f / 2.0f), (1080.0f / 2.0f),
+		-(768.0f / 2.0f), (768.0f / 2.0f),
 		-1000.0f, 1000.0f);
-	glm::mat4 v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z+10)), glm::vec3(0.0, 1.0, 0.0));
-	glm::mat4 m = glm::scale(glm::mat4(1.0), glm::vec3(500.0f,500.0f,500.0f));
+	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z+10)), glm::vec3(0.0, 1.0, 0.0));
+	glm::mat4 m = glm::mat4(1.0);
 	mvp = p * v * m;
 
 	glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 	// set uniforms of text
-	glm::mat4 projection = glm::ortho(0.0f, 800.0f, 0.0f, 600.0f);
 	glUseProgram(TextID);
-	glUniformMatrix4fv(glGetUniformLocation(TextID, "projection"), 1, GL_FALSE, &projection[0][0]);
+	glUniformMatrix4fv(glGetUniformLocation(TextID, "projection"), 1, GL_FALSE, &p[0][0]);
 
 	reportError("First");
 }
@@ -301,22 +440,64 @@ void Renderer::RenderText(std::string text, float x, float y, float scale, glm::
 void Renderer::render(Scene& scene) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	RenderText("This is sample text", 25.0f, 25.0f, 1.0f, glm::vec3(0.5, 0.8f, 0.2f));
-	RenderText("(C) LearnOpenGL.com", 540.0f, 570.0f, 0.5f, glm::vec3(0.3, 0.7f, 0.9f));
-	
-	if (Renderer::mode == RenderMode::GAME) {
-		glUseProgram(ProgramID);
-		// bind Texture
-		for (int i = 0; i < numTextures; i++) {
-			glBindTexture(GL_TEXTURE_2D, texture[i]);
 
-			// render 
+	static char* buf = new char('asd');
+
+	glUseProgram(ProgramID);
+
+	for (auto i = sprites.begin(); i != sprites.end(); i++) {
+		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+		if (tmpSprite != nullptr) {
+			mvp = p * v * (*i)->getModel();
+
+			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
+			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
+
 			glBindVertexArray(VAO);
 			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
 	}
-	if (Renderer::mode == RenderMode::EDITOR) {
-		glUseProgram(ProgramID);
+
+	for (auto i = objects.begin(); i != objects.end(); i++) {
+		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+		if (tmpSprite != nullptr) {
+			mvp = p * v * (*i)->getModel();
+
+			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
+			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
+
+			glBindVertexArray(VAO);
+			glDrawArrays(GL_TRIANGLES, 0, 6);
+		}
+	}
+
+	switch (Renderer::mode)
+	{
+	case  RenderMode::MENU:
+		RenderText("Code.", -505.0f, 322.0f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+		break;
+	case RenderMode::GAME:
+		
+		break;
+	case RenderMode::EDITOR:
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+
+		//ImGui::Text("Hello, world %d", 123);
+		if (ImGui::Button("Save"));
+			//MySaveFunction();
+		ImGui::InputText("string", buf, (int)(sizeof(buf)/sizeof(*buf)));
+
+		(*editor).render();
+
+		// Render dear imgui into screen
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		break;
+	default:
+		break;
 	}
 
 	glfwSwapBuffers(window);
@@ -335,6 +516,12 @@ Renderer::~Renderer()
 	glDeleteVertexArrays(1, &textVAO);
 	glDeleteProgram(ProgramID);
 	glDeleteProgram(TextID);
+
+	glfwDestroyWindow(window);
+
+	//ImGui_ImplOpenGL3_Shutdown();
+	ImGui_ImplGlfw_Shutdown();
+	ImGui::DestroyContext();
 
 	// Close OpenGL window and terminate GLFW
 	//glfwTerminate();
