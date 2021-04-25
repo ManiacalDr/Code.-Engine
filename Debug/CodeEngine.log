@@ -1,0 +1,5 @@
+﻿  AnimationNotes.cpp
+  Animator.cpp
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\animation\Animator.cpp(1,10): fatal error C1083: Cannot open include file: 'spine/spine.h': No such file or directory
+  EventSystem.cpp
+  main.cpp

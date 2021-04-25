@@ -1,7 +1,7 @@
 #ifndef EDITOR_H
 #define EDITOR_H
-#include <object.hpp>
-#include <sprite.h>
+#include "object.hpp"
+#include "sprite.h"
 
 class Editor
 {

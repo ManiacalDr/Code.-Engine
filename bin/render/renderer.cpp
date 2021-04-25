@@ -5,9 +5,9 @@
 #include "windows.h"
 #include "renderer.h"
 #include "sprite.h"
-#include <imgui.h>
-#include <imgui_impl_glfw.h>
-#include <imgui_impl_opengl3.h>
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
 
 void _ReportError(int ln, const std::string str) {
 	GLuint err = glGetError();

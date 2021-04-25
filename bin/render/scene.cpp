@@ -23,7 +23,7 @@ Scene::~Scene()
 }
 
 void addObj(Object* previous, jsoncons::json current) {
-	Object* temp;
+	//Object* temp;
 
 	if (current.contains("name")) {
 		//temp = new Sprite((current)["name"].as<std::string>(), glm::vec3((current)["position"][0].as<float>(), (current)["position"][1].as<float>(), (current)["position"][2].as<float>()), (current)["rotation"].as<double>(), glm::vec3((current)["scale"][0].as<float>(), (current)["scale"][1].as<float>(), (current)["scale"][1].as<float>()));
@@ -39,7 +39,7 @@ void addObj(Object* previous, jsoncons::json current) {
 	}*/
 
 	while (current["link"] != NULL) {
-		addObj(temp, current);
+		//addObj(temp, current);
 	}
 }
 

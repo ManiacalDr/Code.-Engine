@@ -23,7 +23,6 @@
 #include<GL/glu.h>
 #include "scene.h"
 #include "editor.h"
-#include <editor.h>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 #define reportError(s) _ReportError(__LINE__, (s))
