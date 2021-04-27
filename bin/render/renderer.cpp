@@ -154,7 +154,6 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 						if (object->ID == "Start") mode = RenderMode::GAME;
 						if (object->ID == "Editor") {
 							mode = RenderMode::EDITOR;
-
 							// Setup Dear ImGui context
 							//IMGUI_CHECKVERSION();
 							ImGui::CreateContext();
@@ -480,6 +479,9 @@ void Renderer::render(Scene& scene) {
 		
 		break;
 	case RenderMode::EDITOR:
+
+		//glViewport(0, 0, 1080, 250);
+		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();

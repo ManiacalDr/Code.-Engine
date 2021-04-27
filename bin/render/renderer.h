@@ -49,8 +49,6 @@ public:
 	void updateScene(Scene&);
 
 	bool finish = true;
-	float speed = 0.5;
-	std::map<char, Character> Characters;
 
 	RenderMode getMode() {
 		return mode;
@@ -63,7 +61,6 @@ public:
 private:
 	GLuint VBO = 0, VAO = 0, textVAO = 0, textVBO = 0;
 	GLuint ProgramID = 0, TextID = 0;
-	GLuint texture[16];
 	glm::mat4 p = glm::mat4(1.0f);
 	glm::mat4 v = glm::mat4(1.0f);
 	GLuint MVP = 0;
@@ -75,6 +72,8 @@ private:
 	Editor* editor;
 
 	RenderMode mode = RenderMode::MENU;
+	float speed = 0.5;
+	std::map<char, Character> Characters;
 
 	std::vector<Object*> objects;
 	std::vector<Object*> sprites;
@@ -106,8 +105,8 @@ private:
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
-		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
-		renderer->framebuffer_size_callback(width, height);
+		//Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
+		//renderer->framebuffer_size_callback(width, height);
 	}
 
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {

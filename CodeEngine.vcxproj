@@ -112,7 +112,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>\bin\drivers\include;$(IncludePath)</IncludePath>
+    <IncludePath>bin\drivers\include;$(IncludePath)</IncludePath>
     <ExecutablePath>\assets;$(ExecutablePath)</ExecutablePath>
     <LibraryPath>bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\release static\win64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
