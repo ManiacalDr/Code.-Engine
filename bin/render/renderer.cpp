@@ -86,7 +86,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 	bool spriteHit = false, objHit = false;
 	Object* sprite = new Object(), *object = new Object();
 
-	for (auto i = sprites.begin(); i != sprites.end(); i++) {
+	for (auto i = scene->sprites.begin(); i != scene->sprites.end(); i++) {
 		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
 			std::cout << "\nObject was hit\n";
 			spriteHit = true;
@@ -95,7 +95,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 		}
 	}
 
-	for (auto i = objects.begin(); i != objects.end(); i++) {
+	for (auto i = (*scene).objects.begin(); i != (*scene).objects.end(); i++) {
 		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
 			std::cout << "\nObject was hit\n";
 			objHit = true;
@@ -137,15 +137,15 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 					}
 					if (spriteHit == true) {
 						if (pressed[GLFW_KEY_LEFT_CONTROL]) {
-							auto temp = std::find(sprites.begin(), sprites.end(), sprite);
-							sprites.erase(temp);
+							auto temp = std::find(scene->sprites.begin(), scene->sprites.end(), sprite);
+							scene->sprites.erase(temp);
 							editor->removeEditable();
 						}
 					}
 					else if (objHit == false && (*editor).selection != NULL && (*editor).editable == NULL) {
 						Sprite* tmpSprite = dynamic_cast<Sprite*>((*editor).selection);
 						if (tmpSprite != nullptr) {
-							sprites.emplace_back(new Sprite((*tmpSprite).name, (*tmpSprite).UV, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
+							scene->sprites.emplace_back(new Sprite((*tmpSprite).name, (*tmpSprite).UV, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
 						}
 					}
 					break;
@@ -164,18 +164,6 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 							ImGui_ImplOpenGL3_Init(glsl_version);
 							// Setup Dear ImGui style
 							ImGui::StyleColorsDark();
-
-							objects.clear();
-							float xpos = -480.0f;
-							int id = 0;
-
-							for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures")) {
-								std::cout << entry.path() << boost::filesystem::extension(entry.path()) << '\n';
-								if (boost::filesystem::extension(entry.path()) == ".jpg" || boost::filesystem::extension(entry.path()) == ".png") {
-									objects.emplace_back(new Sprite(entry.path().stem().string(), glm::mat2x4(1.0f), entry.path().string(), glm::vec3(xpos, -286.0f, 0.0f), 0.0f, glm::vec3(100.0f), std::to_string(id)));
-									xpos += 150.0f;
-								}
-							}
 						}
 						if (object->ID == "Quit") finish = false;
 					}
@@ -358,10 +346,6 @@ Renderer::Renderer()
 
 	initialize();
 
-	objects.emplace_back(new Sprite("start", glm::mat2x4(1.0f) ,"assets/textures/menu/start.png", glm::vec3(-387.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Start"));
-	objects.emplace_back(new Sprite("editor", glm::mat2x4(1.0f), "assets/textures/menu/editor.png", glm::vec3(-67.5f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Editor"));
-	objects.emplace_back(new Sprite("quit", glm::mat2x4(1.0f), "assets/textures/menu/quit.png", glm::vec3(326.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Quit"));
-
 	glfwSetWindowUserPointer(window, this);
 	glfwSetKeyCallback(window, KeyboardCB);//must be called after creating window
 	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);//must be called after creating window
@@ -444,7 +428,7 @@ void Renderer::render(Scene& scene) {
 
 	glUseProgram(ProgramID);
 
-	for (auto i = sprites.begin(); i != sprites.end(); i++) {
+	for (auto i = scene.sprites.begin(); i != scene.sprites.end(); i++) {
 		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 		if (tmpSprite != nullptr) {
 			mvp = p * v * (*i)->getModel();
@@ -457,7 +441,7 @@ void Renderer::render(Scene& scene) {
 		}
 	}
 
-	for (auto i = objects.begin(); i != objects.end(); i++) {
+	for (auto i = scene.objects.begin(); i != scene.objects.end(); i++) {
 		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 		if (tmpSprite != nullptr) {
 			mvp = p * v * (*i)->getModel();

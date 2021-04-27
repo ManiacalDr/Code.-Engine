@@ -10,6 +10,8 @@ class Scene
 {
 public:
 	Object* root;
+	std::vector<Object*> objects;
+	std::vector<Object*> sprites;
 
 	Scene();
 	~Scene();

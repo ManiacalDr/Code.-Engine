@@ -28,6 +28,7 @@
 #define reportError(s) _ReportError(__LINE__, (s))
 
 enum class RenderMode {
+	NONE,
 	GAME,
 	EDITOR,
 	MENU
@@ -58,6 +59,10 @@ public:
 		editor = edi;
 	}
 
+	void setScene(Scene* scn) {
+		scene = scn;
+	}
+
 private:
 	GLuint VBO = 0, VAO = 0, textVAO = 0, textVBO = 0;
 	GLuint ProgramID = 0, TextID = 0;
@@ -70,13 +75,11 @@ private:
 
 	GLFWwindow* window = 0;
 	Editor* editor;
+	Scene* scene;
 
 	RenderMode mode = RenderMode::MENU;
 	float speed = 0.5;
 	std::map<char, Character> Characters;
-
-	std::vector<Object*> objects;
-	std::vector<Object*> sprites;
 
 	void KeyboardCB(int key, int scancode, int action, int mods);
 

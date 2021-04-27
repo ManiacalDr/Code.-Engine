@@ -107,5 +107,8 @@
     <ClInclude Include="bin\render\stb_image.h">
       <Filter>Source Files</Filter>
     </ClInclude>
+    <ClInclude Include="bin\collision\collision.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

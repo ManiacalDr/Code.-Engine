@@ -37,6 +37,7 @@
     <ClCompile Include="bin\render\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bin\collision\collision.hpp" />
     <ClInclude Include="bin\render\editor.h" />
     <ClInclude Include="bin\render\imconfig.h" />
     <ClInclude Include="bin\render\imgui.h" />
@@ -153,7 +154,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>bin\render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
