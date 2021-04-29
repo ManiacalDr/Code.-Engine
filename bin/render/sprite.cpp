@@ -23,6 +23,7 @@
 #include "sprite.h"
 #include <box2d/box2d.h>
 #include "scene.h"
+#include <time.h>
 
 Sprite::Sprite() {
 
@@ -35,7 +36,7 @@ Sprite::~Sprite() {
 Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 
-
+	curFrame = defaultUV;
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -70,7 +71,7 @@ Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s,
 Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 
-	
+	curFrame = defaultUV;
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -106,6 +107,7 @@ Sprite::Sprite(Scene* sc,bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::
 	name = n;
     scene = sc;
 	texture = t;
+	curFrame = defaultUV;
 
 }
 
@@ -122,6 +124,7 @@ void Sprite::removeCollier() {
 
 void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize) {
 	UV = new glm::mat4x2[frames];
+	animationList = new glm::mat4x2*;
 	glm::vec2 first = start;
 	for (int i = 0; i < frames; i++)
 	{
@@ -134,10 +137,18 @@ void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSi
 		{
 			break;
 		}
-		glm::mat4x2 frameSet(first.x, first.y, first.x, first.y + frameSize.y, first.x + frameSize.x, first.y + frameSize.y, first.x + frameSize.x, first.y);
+		glm::mat4x2 frameSet(first.x/end.x, first.y/end.y, 
+			first.x/end.x, (first.y + frameSize.y)/end.y, 
+			(first.x + frameSize.x)/end.x, (first.y)/end.y,
+			(first.x + frameSize.x) / end.x, (first.y + frameSize.y) / end.y);
 		UV[i] = frameSet;//marks one frame
 		first.x += frameSize.x;
 	}
+}
+
+void Sprite::setCurFrame(int frame)
+{
+	curFrame = UV[frame];
 }
 
 void Sprite::setAnimation(int frames[], int frameSize)//adds all the frames from the number in frames[i]
@@ -148,6 +159,19 @@ void Sprite::setAnimation(int frames[], int frameSize)//adds all the frames from
 		animationList[animationSize][i] = UV[frames[i]];
 	}
 	animationSize++;
+}
+
+void Sprite::startAnimation(int animation, int size)
+{
+	if (fpsCount % (int)fps == 0)
+	{
+		std::cout << animationList[animation];
+		if (frame >= size)
+			frame = 0;
+		curFrame = animationList[animation][frame];
+		frame++;
+	}
+	fpsCount++;
 }
 
 void Sprite::colliderTranslate()

@@ -27,6 +27,7 @@ int main() {
 		if (mode != renderer.getMode()) {
 			mode = renderer.getMode();
 			Sprite* tmp;
+			int* tmpFrames;
 			switch (renderer.getMode()) {
 			case RenderMode::MENU:
 				scene.objects.emplace_back(new Sprite("start", "assets/textures/menu/start.png", glm::vec3(-387.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Start"));
@@ -38,8 +39,11 @@ int main() {
 				break;
 			case RenderMode::EDITOR:
 				scene.objects.clear();
-				//tmp = new Sprite("dragon", glm::mat2x4(1.0f), "assets/animations/picturedragonFrames_thumb.png", glm::vec3(0.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "dragon");
-
+				tmp = new Sprite("dragon", glm::mat2x4(1.0f), "assets/animations/picturedragonFrames_thumb.png", glm::vec3(0.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "dragon");
+				tmp->setUV(glm::vec2(0, 0), glm::vec2(318, 424), 12, glm::vec2(106, 106));
+				tmpFrames = new int[2]{ 0,1};
+				tmp->setAnimation(tmpFrames, 2);
+				scene.objects.emplace_back(tmp);
 				for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures")) {
 					std::cout << entry.path() << boost::filesystem::extension(entry.path()) << '\n';
 					if (boost::filesystem::extension(entry.path()) == ".jpg" || boost::filesystem::extension(entry.path()) == ".png") {

@@ -14,8 +14,11 @@ public:
 	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0);
 	std::string name;
 	glm::mat4x2* UV; // if applicable
+	glm::mat4x2 curFrame;
 	glm::mat4x2** animationList;
+	bool animating = false;
 	int animationSize = 0;
+	int frame = 0;
 	GLuint texture;
 	Collision collision;
 	b2Body* collider;
@@ -23,6 +26,8 @@ public:
 
 	const float M2P = 32;
 	const float P2M = 1 / M2P;
+	const float fps = 60;
+	int fpsCount = 0;
 
 	Sprite();
 	~Sprite();
@@ -36,6 +41,8 @@ public:
 
 	void setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize);
 	void setAnimation(int frames[], int frameSize);
+	void setCurFrame(int frame);
+	void startAnimation(int,int);
 
 	void colliderTranslate();
 	void spriteTranslate();

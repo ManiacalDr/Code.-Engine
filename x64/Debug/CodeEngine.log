@@ -1,50 +1,29 @@
-﻿  main.cpp
+﻿  sprite.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\Users\alcal\OneDrive\Desktop\code2\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\main.cpp(29,12): warning C4101: 'tmp': unreferenced local variable
-  editor.cpp
-  renderer.cpp
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,264): error C2664: 'Sprite::Sprite(Scene *,bool,std::string,glm::mat4x2,GLuint,glm::vec3,double,glm::vec3,std::string)': cannot convert argument 4 from 'glm::mat4x2 *' to 'glm::mat4x2'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,264): message : No constructor could take the source type, or constructor overload resolution was ambiguous
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.h(32,2): message : see declaration of 'Sprite::Sprite'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,22): error C2672: 'std::vector<Object *,std::allocator<Object *>>::emplace_back': no matching overloaded function found
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(333,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(428,36): warning C4305: 'initializing': truncation from 'int' to 'char'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(428,30): warning C4309: 'initializing': truncation of constant value
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(441,64): error C2664: 'void (GLint,GLsizei,GLboolean,const GLfloat *)': cannot convert argument 4 from 'glm::vec<2,float,glm::packed_highp> *' to 'const GLfloat *'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(441,42): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(455,61): error C2664: 'void (GLint,GLsizei,GLboolean,const GLfloat *)': cannot convert argument 4 from 'glm::vec<2,float,glm::packed_highp> *' to 'const GLfloat *'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(455,39): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(482,29): warning C4390: ';': empty controlled statement found; is this the intent?
-  scene.cpp
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\scene.cpp(20,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\scene.cpp(26,28): warning C4305: 'argument': truncation from 'double' to 'float'
-  sprite.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\Users\alcal\OneDrive\Desktop\code2\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(35,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(70,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(105,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(36,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(71,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(106,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(117,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(117,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(117,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(117,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(159,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(167,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-  Generating Code...
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(183,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(191,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  CodeEngine.vcxproj -> C:\Users\alcal\OneDrive\Desktop\code2\x64\Debug\CodeEngine.exe

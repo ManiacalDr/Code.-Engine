@@ -145,7 +145,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 					else if (objHit == false && (*editor).selection != NULL && (*editor).editable == NULL) {
 						Sprite* tmpSprite = dynamic_cast<Sprite*>((*editor).selection);
 						if (tmpSprite != nullptr) {
-							scene->sprites.emplace_back(new Sprite((scene),true,(*tmpSprite).name, (*tmpSprite).UV, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
+							scene->sprites.emplace_back(new Sprite((scene),true,(*tmpSprite).name, (*tmpSprite).UV[0], (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
 						}
 					}
 					break;
@@ -438,7 +438,7 @@ void Renderer::render(Scene& scene) {
 			}
 			mvp = p * v * (*i)->getModel();
 
-			glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->UV[0][0]));
+			glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->curFrame[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
@@ -450,9 +450,16 @@ void Renderer::render(Scene& scene) {
 	for (auto i = scene.objects.begin(); i != scene.objects.end(); i++) {
 		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 		if (tmpSprite != nullptr) {
+			if (tmpSprite->collider != nullptr)
+			{
+				tmpSprite->colliderTranslate();
+			}
 			mvp = p * v * (*i)->getModel();
-
-			glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->UV[0][0]));
+			if (tmpSprite->UV != nullptr)
+			{
+				tmpSprite->startAnimation(0,2);
+			}
+				glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
