@@ -13,7 +13,9 @@ class Sprite : public Object
 public:
 	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0);
 	std::string name;
-	glm::mat4x2 UV; // if applicable
+	glm::mat4x2* UV; // if applicable
+	glm::mat4x2** animationList;
+	int animationSize = 0;
 	GLuint texture;
 	Collision collision;
 	b2Body* collider;
@@ -28,8 +30,12 @@ public:
 	Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
 	Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
 	Sprite(Scene* scene,bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i);
+
 	void addCollider(bool);
 	void removeCollier();
+
+	void setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize);
+	void setAnimation(int frames[], int frameSize);
 
 	void colliderTranslate();
 	void spriteTranslate();

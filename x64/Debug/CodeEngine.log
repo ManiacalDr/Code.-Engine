@@ -1,157 +1,50 @@
 ﻿  main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\main.cpp(29,12): warning C4101: 'tmp': unreferenced local variable
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\alcal\OneDrive\Desktop\code2\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\main.cpp(29,12): warning C4101: 'tmp': unreferenced local variable
   editor.cpp
   renderer.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(333,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(428,36): warning C4305: 'initializing': truncation from 'int' to 'char'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(428,30): warning C4309: 'initializing': truncation of constant value
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(482,29): warning C4390: ';': empty controlled statement found; is this the intent?
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,264): error C2664: 'Sprite::Sprite(Scene *,bool,std::string,glm::mat4x2,GLuint,glm::vec3,double,glm::vec3,std::string)': cannot convert argument 4 from 'glm::mat4x2 *' to 'glm::mat4x2'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,264): message : No constructor could take the source type, or constructor overload resolution was ambiguous
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.h(32,2): message : see declaration of 'Sprite::Sprite'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(148,22): error C2672: 'std::vector<Object *,std::allocator<Object *>>::emplace_back': no matching overloaded function found
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(333,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(428,36): warning C4305: 'initializing': truncation from 'int' to 'char'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(428,30): warning C4309: 'initializing': truncation of constant value
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(441,64): error C2664: 'void (GLint,GLsizei,GLboolean,const GLfloat *)': cannot convert argument 4 from 'glm::vec<2,float,glm::packed_highp> *' to 'const GLfloat *'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(441,42): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(455,61): error C2664: 'void (GLint,GLsizei,GLboolean,const GLfloat *)': cannot convert argument 4 from 'glm::vec<2,float,glm::packed_highp> *' to 'const GLfloat *'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(455,39): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\renderer.cpp(482,29): warning C4390: ';': empty controlled statement found; is this the intent?
   scene.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(20,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(26,28): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\scene.cpp(20,39): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\scene.cpp(26,28): warning C4305: 'argument': truncation from 'double' to 'float'
   sprite.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(35,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(71,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(107,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(118,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.18362.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
+C:\Users\alcal\OneDrive\Desktop\code2\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(35,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(70,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(105,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(118,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(118,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(118,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(115,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(132,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(140,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(159,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alcal\OneDrive\Desktop\code2\bin\render\sprite.cpp(167,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4098: defaultlib 'MSVCRT' conflicts with use of other libs; use /NODEFAULTLIB:library
-LINK : warning LNK4217: symbol '__glewActiveTexture' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewBlendEquation' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_SetupRenderState(struct ImDrawData *,int,int,unsigned int)" (?ImGui_ImplOpenGL3_SetupRenderState@@YAXPEAUImDrawData@@HHI@Z)'
-LINK : warning LNK4217: symbol '__glewBlendFuncSeparate' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewBindBuffer' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4217: symbol '__glewBufferData' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewDeleteBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_DestroyDeviceObjects(void)" (?ImGui_ImplOpenGL3_DestroyDeviceObjects@@YAXXZ)'
-LINK : warning LNK4217: symbol '__glewGenBuffers' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4217: symbol '__glewAttachShader' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewAttachShader' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewBlendEquationSeparate' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewCompileShader' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewCompileShader' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewCreateProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewCreateProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewCreateShader' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewCreateShader' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewDeleteProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_DestroyDeviceObjects(void)" (?ImGui_ImplOpenGL3_DestroyDeviceObjects@@YAXXZ)'
-LINK : warning LNK4217: symbol '__glewDeleteShader' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_DestroyDeviceObjects(void)" (?ImGui_ImplOpenGL3_DestroyDeviceObjects@@YAXXZ)'
-LINK : warning LNK4286: symbol '__glewDeleteShader' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewDetachShader' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_DestroyDeviceObjects(void)" (?ImGui_ImplOpenGL3_DestroyDeviceObjects@@YAXXZ)'
-LINK : warning LNK4286: symbol '__glewDetachShader' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewEnableVertexAttribArray' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_SetupRenderState(struct ImDrawData *,int,int,unsigned int)" (?ImGui_ImplOpenGL3_SetupRenderState@@YAXPEAUImDrawData@@HHI@Z)'
-LINK : warning LNK4217: symbol '__glewGetAttribLocation' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4217: symbol '__glewGetProgramInfoLog' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl CheckProgram(unsigned int,char const *)" (?CheckProgram@@YA_NIPEBD@Z)'
-LINK : warning LNK4286: symbol '__glewGetProgramInfoLog' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewGetProgramiv' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl CheckProgram(unsigned int,char const *)" (?CheckProgram@@YA_NIPEBD@Z)'
-LINK : warning LNK4286: symbol '__glewGetProgramiv' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewGetShaderInfoLog' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl CheckShader(unsigned int,char const *)" (?CheckShader@@YA_NIPEBD@Z)'
-LINK : warning LNK4286: symbol '__glewGetShaderInfoLog' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewGetShaderiv' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl CheckShader(unsigned int,char const *)" (?CheckShader@@YA_NIPEBD@Z)'
-LINK : warning LNK4286: symbol '__glewGetShaderiv' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewGetUniformLocation' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4217: symbol '__glewLinkProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewLinkProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewShaderSource' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4286: symbol '__glewShaderSource' defined in 'glew32s.lib(glew.obj)' is imported by 'shaderLoader.obj'
-LINK : warning LNK4217: symbol '__glewUniform1i' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_SetupRenderState(struct ImDrawData *,int,int,unsigned int)" (?ImGui_ImplOpenGL3_SetupRenderState@@YAXPEAUImDrawData@@HHI@Z)'
-LINK : warning LNK4217: symbol '__glewUniformMatrix4fv' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_SetupRenderState(struct ImDrawData *,int,int,unsigned int)" (?ImGui_ImplOpenGL3_SetupRenderState@@YAXPEAUImDrawData@@HHI@Z)'
-LINK : warning LNK4217: symbol '__glewUseProgram' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewVertexAttribPointer' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_SetupRenderState(struct ImDrawData *,int,int,unsigned int)" (?ImGui_ImplOpenGL3_SetupRenderState@@YAXPEAUImDrawData@@HHI@Z)'
-LINK : warning LNK4217: symbol '__glewDrawElementsBaseVertex' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewBindSampler' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewBindVertexArray' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"bool __cdecl ImGui_ImplOpenGL3_CreateDeviceObjects(void)" (?ImGui_ImplOpenGL3_CreateDeviceObjects@@YA_NXZ)'
-LINK : warning LNK4217: symbol '__glewDeleteVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-LINK : warning LNK4217: symbol '__glewGenVertexArrays' defined in 'glew32s.lib(glew.obj)' is imported by 'imgui_impl_opengl3.obj' in function '"void __cdecl ImGui_ImplOpenGL3_RenderDrawData(struct ImDrawData *)" (?ImGui_ImplOpenGL3_RenderDrawData@@YAXPEAUImDrawData@@@Z)'
-box2d.lib(b2_broad_phase.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_broad_phase.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_chain_shape.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_chain_shape.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_collide_circle.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_collide_circle.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_collide_edge.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_collide_edge.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_collide_polygon.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_collide_polygon.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_collision.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_collision.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_distance.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_distance.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_dynamic_tree.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_dynamic_tree.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_edge_shape.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_edge_shape.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_polygon_shape.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_polygon_shape.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_time_of_impact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_time_of_impact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_block_allocator.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_block_allocator.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_draw.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_draw.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_math.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_math.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_settings.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_settings.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_stack_allocator.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_stack_allocator.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_timer.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_timer.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_body.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_body.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_chain_circle_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_chain_circle_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_chain_polygon_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_chain_polygon_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_circle_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_circle_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_contact_manager.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_contact_manager.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_contact_solver.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_contact_solver.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_distance_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_distance_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_edge_circle_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_edge_circle_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_edge_polygon_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_edge_polygon_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_fixture.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_fixture.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_friction_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_friction_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_gear_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_gear_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_island.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_island.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_motor_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_motor_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_mouse_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_mouse_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_polygon_circle_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_polygon_circle_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_polygon_contact.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_polygon_contact.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_prismatic_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_prismatic_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_pulley_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_pulley_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_revolute_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_revolute_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_weld_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_weld_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_wheel_joint.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_wheel_joint.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_world.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_world.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-box2d.lib(b2_world_callbacks.obj) : warning LNK4099: PDB 'box2d.pdb' was not found with 'box2d.lib(b2_world_callbacks.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\box2d.pdb'; linking object as if no debug info
-glew32s.lib(glew.obj) : warning LNK4099: PDB 'glew_static.pdb' was not found with 'glew32s.lib(glew.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\glew_static.pdb'; linking object as if no debug info
-freetype.lib(autofit.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(autofit.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(ftbase.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftbase.obj)' or at ''; linking object as if no debug info
-freetype.lib(ftbitmap.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(ftbitmap.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(ftinit.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(ftinit.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(ftsystem.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(ftsystem.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(bdf.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(bdf.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(cff.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(cff.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(type1cid.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(type1cid.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(ftgzip.obj) : warning LNK4099: PDB '' was not found with 'freetype.lib(ftgzip.obj)' or at ''; linking object as if no debug info
-freetype.lib(ftlzw.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(ftlzw.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(pcf.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(pcf.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(pfr.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(pfr.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(psaux.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(psaux.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(pshinter.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(pshinter.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(psmodule.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(psmodule.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(raster.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(raster.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(sfnt.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(sfnt.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(smooth.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(smooth.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(truetype.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(truetype.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(type1.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(type1.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(type42.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(type42.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(winfnt.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(winfnt.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-freetype.lib(ftdebug.obj) : warning LNK4099: PDB 'freetype.pdb' was not found with 'freetype.lib(ftdebug.obj)' or at 'C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\freetype.pdb'; linking object as if no debug info
-  CodeEngine.vcxproj -> C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\CodeEngine.exe

@@ -34,7 +34,6 @@ Sprite::~Sprite() {
 
 Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
-	UV = defaultUV;
 
 
 
@@ -70,7 +69,6 @@ Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s,
 
 Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
-	UV = uv;
 
 	
 
@@ -106,7 +104,6 @@ Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double
 
 Sprite::Sprite(Scene* sc,bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
-	UV = uv;
     scene = sc;
 	texture = t;
 
@@ -121,6 +118,36 @@ void Sprite::addCollider(bool dyn)
 void Sprite::removeCollier() {
 
 	collider = nullptr;
+}
+
+void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize) {
+	UV = new glm::mat4x2[frames];
+	glm::vec2 first = start;
+	for (int i = 0; i < frames; i++)
+	{
+		if (first.x > end.x)//if row is done, go to the next one
+		{
+			first.x = start.x;
+			first.y += frameSize.y;
+		}
+		if (first.y > end.y)//if the whole page is done before i=frames, then it breaks;
+		{
+			break;
+		}
+		glm::mat4x2 frameSet(first.x, first.y, first.x, first.y + frameSize.y, first.x + frameSize.x, first.y + frameSize.y, first.x + frameSize.x, first.y);
+		UV[i] = frameSet;//marks one frame
+		first.x += frameSize.x;
+	}
+}
+
+void Sprite::setAnimation(int frames[], int frameSize)//adds all the frames from the number in frames[i]
+{
+	animationList[animationSize] = new glm::mat4x2[frameSize];
+	for (int i = 0; i < frameSize; i++)
+	{
+		animationList[animationSize][i] = UV[frames[i]];
+	}
+	animationSize++;
 }
 
 void Sprite::colliderTranslate()
