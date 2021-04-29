@@ -5,16 +5,20 @@
 #include <memory>
 #include <string>
 #include "object.hpp"
+#include <box2d/box2d.h>
 
 class Scene
 {
 public:
 	Object* root;
+	b2World* world;
 	std::vector<Object*> objects;
 	std::vector<Object*> sprites;
 
 	Scene();
 	~Scene();
+
+	void worldStep();
 
 	void processFile(const std::string file);
 	void writeFile(const std::string file);

@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="bin\animation\AnimationNotes.cpp" />
     <ClCompile Include="bin\animation\Animator.cpp" />
-    <ClCompile Include="bin\event\EventSystem.cpp" />
     <ClCompile Include="bin\main.cpp" />
     <ClCompile Include="bin\render\editor.cpp" />
     <ClCompile Include="bin\render\imgui.cpp" />
@@ -113,12 +112,15 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>bin\drivers\include;$(IncludePath)</IncludePath>
-    <ExecutablePath>\assets;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\release static\win64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\alcal\spine-runtimes\spine-cpp\spine-cpp\include\spine;C:\Users\alcal\Downloads\jsoncons-master\jsoncons-master\include;bin\drivers\include;bin\drivers\include;$(IncludePath)</IncludePath>
+    <ExecutablePath>\assets;\assets;$(ExecutablePath)</ExecutablePath>
+    <LibraryPath>bin\drivers\box2d\bin\Debug;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;bin\drivers\lib\release static\win64;bin\drivers\lib\x64;bin\drivers\lib;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\release static\win64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>bin\drivers\box2d\bin\Debug;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;bin\drivers\lib\release static\win64;bin\drivers\lib\x64;bin\drivers\lib;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <ExecutablePath>\assets;$(VC_ExecutablePath_x64);$(CommonExecutablePath)</ExecutablePath>
+    <IncludePath>C:\Users\alcal\spine-runtimes\spine-cpp\spine-cpp\include\spine;C:\Users\alcal\Downloads\jsoncons-master\jsoncons-master\include;bin\drivers\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -154,12 +156,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>bin\render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>bin\render;bin\collisionbin/renderbin\render;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;glew32s.lib;glu32.lib;glfw3.lib;freetype.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32s.lib;glu32.lib;glfw3.lib;freetype.lib;opengl32.lib;glew32s.lib;glu32.lib;glfw3.lib;freetype.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -170,12 +172,14 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>bin\render;bin\collisionbin/render</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>box2d.lib;opengl32.lib;glew32s.lib;glu32.lib;glfw3.lib;freetype.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

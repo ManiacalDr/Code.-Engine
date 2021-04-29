@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #include "stb_image.h"
 
@@ -20,6 +21,8 @@
 #include<GL/glu.h>
 
 #include "sprite.h"
+#include <box2d/box2d.h>
+#include "scene.h"
 
 Sprite::Sprite() {
 
@@ -32,6 +35,8 @@ Sprite::~Sprite() {
 Sprite::Sprite(std::string n, glm::mat2x4 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 	UV = uv;
+
+	
 
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -63,9 +68,34 @@ Sprite::Sprite(std::string n, glm::mat2x4 uv, std::string t, glm::vec3 p, double
 	stbi_image_free(data);
 }
 
-Sprite::Sprite(std::string n, glm::mat2x4 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
+Sprite::Sprite(Scene* sc,bool dyn,std::string n, glm::mat2x4 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 	UV = uv;
-
+    scene = sc;
 	texture = t;
+
+}
+
+void Sprite::addCollider(bool dyn)
+{
+
+	collider = collision.addRect(scene,this->position.x,this->position.y,this->scaleValue.x,this->scaleValue.y,dyn);
+}
+
+void Sprite::colliderTranslate()
+{
+	if (collider != nullptr)
+	{
+		this->position.x = collider->GetPosition().x * M2P;
+		this->position.y = collider->GetPosition().y * M2P;
+		this->rotation = collider->GetAngle() * (180.0 / 3.141592653589793238463);
+	}
+}
+
+void Sprite::spriteTranslate()
+{
+	if (collider != nullptr)
+	{
+		collider->SetTransform(b2Vec2(this->position.x * P2M, this->position.y * P2M), this->rotation / (180.0 / 3.141592653589793238463));
+	}
 }

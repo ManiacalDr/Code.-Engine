@@ -11,10 +11,19 @@
 #include "scene.h"
 #include "object.hpp"
 #include "sprite.h"
+#include <box2d/box2d.h>
+
 
 Scene::Scene()
 {
 	root = new Object();
+	world = new b2World(b2Vec2(0.0, -5.81));
+	void worldStep();
+}
+
+void Scene::worldStep()
+{
+	world->Step(1.0 / 60.0, 8, 3);
 }
 
 Scene::~Scene()

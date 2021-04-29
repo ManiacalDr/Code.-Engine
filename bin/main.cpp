@@ -12,9 +12,6 @@ int main() {
 	Renderer renderer;
 	Scene scene;
 	Editor editor;
-	Collision collision;
-
-	collision.setScene(&scene);
 
 	renderer.setScene(&scene);
 	renderer.setEditor(&editor);
@@ -28,6 +25,7 @@ int main() {
 
 	do {
 		if (mode != renderer.getMode()) {
+			Sprite* tmp;
 			switch (renderer.getMode()) {
 			case RenderMode::MENU:
 				mode = RenderMode::MENU;
@@ -41,6 +39,8 @@ int main() {
 			case RenderMode::EDITOR:
 				scene.objects.clear();
 				mode = RenderMode::EDITOR;
+				//tmp = new Sprite("dragon", glm::mat2x4(1.0f), "assets/animations/picturedragonFrames_thumb.png", glm::vec3(0.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "dragon");
+
 				for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures")) {
 					std::cout << entry.path() << boost::filesystem::extension(entry.path()) << '\n';
 					if (boost::filesystem::extension(entry.path()) == ".jpg" || boost::filesystem::extension(entry.path()) == ".png") {
