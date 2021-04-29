@@ -11,7 +11,7 @@
 class Sprite : public Object
 {
 public:
-	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0);
+	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 0.5, 1.0, 0.0, 1.0, 0.5);
 	std::string name;
 	glm::mat4x2 UV; // if applicable
 	GLuint texture;

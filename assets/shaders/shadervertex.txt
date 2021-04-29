@@ -2,6 +2,7 @@
 in vec3 aPos;
 in vec2 aTexCoord;
 
+uniform mat4x2 texcoords;
 uniform mat4 mvp;
 
 out vec2 TexCoord;
@@ -9,5 +10,21 @@ out vec2 TexCoord;
 void main()
 {
     gl_Position = mvp * vec4(aPos, 1.0);
-    TexCoord = aTexCoord;
+
+	if(aTexCoord.x == 1){
+		if(aTexCoord.y == 1){
+			TexCoord = texcoords[3];
+		}
+		else{
+			TexCoord =  texcoords[2];
+		}
+	}
+	else{
+		if(aTexCoord.y == 1){
+			TexCoord =  texcoords[1];
+		}
+		else{
+			TexCoord =  texcoords[0];
+		}
+	}
 }

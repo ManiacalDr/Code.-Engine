@@ -359,6 +359,7 @@ Renderer::Renderer()
 	glUniform1i(glGetUniformLocation(ProgramID, "atexture"), 0);
 	glUniform3f(glGetUniformLocation(ProgramID, "aColor"), 1.0f, 1.0f, 1.0f);
 	MVP = glGetUniformLocation(ProgramID, "mvp");
+	UV = glGetUniformLocation(ProgramID, "texcoords");
 
 	p = glm::ortho(-(1080.0f / 2.0f), (1080.0f / 2.0f),
 		-(768.0f / 2.0f), (768.0f / 2.0f),
@@ -437,6 +438,7 @@ void Renderer::render(Scene& scene) {
 			}
 			mvp = p * v * (*i)->getModel();
 
+			glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->UV[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
@@ -450,6 +452,7 @@ void Renderer::render(Scene& scene) {
 		if (tmpSprite != nullptr) {
 			mvp = p * v * (*i)->getModel();
 
+			glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->UV[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
@@ -495,8 +498,6 @@ void Renderer::render(Scene& scene) {
 
 	if (glfwWindowShouldClose(window)) { finish = false; }
 	//reportError("render");
-
-	scene.worldStep();
 }
 
 Renderer::~Renderer()

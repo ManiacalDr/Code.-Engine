@@ -47,7 +47,9 @@ public:
 	Renderer();
 	~Renderer();
 	void render(Scene&);
-	void updateScene(Scene&);
+	void updateScene(Scene* scn) {
+		scene = scn;
+	}
 
 	bool finish = true;
 
@@ -69,6 +71,7 @@ private:
 	glm::mat4 p = glm::mat4(1.0f);
 	glm::mat4 v = glm::mat4(1.0f);
 	GLuint MVP = 0;
+	GLuint UV = 0;
 	glm::vec3 cam = glm::vec3(0.0, 0.0, 0.0);
 	glm::mat4 mvp = glm::mat4(1.0f);
 	bool pressed[GLFW_KEY_MENU];

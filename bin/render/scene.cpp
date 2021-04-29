@@ -23,7 +23,7 @@ Scene::Scene()
 
 void Scene::worldStep()
 {
-	world->Step(1.0 / 60.0, 8, 3);
+	world->Step(1.0 / 60, 8, 3);
 }
 
 Scene::~Scene()

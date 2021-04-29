@@ -28,7 +28,10 @@ void Editor::render()
 			ImGui::Checkbox("addActiveCollider", &active);
 			ImGui::Checkbox("addPassiveCollider", &passive);
 		}
-		mysprite->spriteTranslate();
+		if (mysprite->collider != nullptr) {
+			ImGui::Checkbox("remove collider", &active);
+		}
+		//mysprite->spriteTranslate();
 		ImGui::End();
 	}
 	if (active && mysprite->collider == nullptr)
@@ -38,5 +41,8 @@ void Editor::render()
 	else if (passive && mysprite->collider == nullptr)
 	{
 		mysprite->addCollider(false);
+	}
+	else if (active && mysprite->collider != nullptr) {
+		mysprite->removeCollier();
 	}
 }

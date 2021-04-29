@@ -114,7 +114,7 @@
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>C:\Users\alcal\spine-runtimes\spine-cpp\spine-cpp\include\spine;C:\Users\alcal\Downloads\jsoncons-master\jsoncons-master\include;bin\drivers\include;bin\drivers\include;$(IncludePath)</IncludePath>
     <ExecutablePath>\assets;\assets;$(ExecutablePath)</ExecutablePath>
-    <LibraryPath>bin\drivers\box2d\bin\Debug;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;bin\drivers\lib\release static\win64;bin\drivers\lib\x64;bin\drivers\lib;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\release static\win64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>bin\drivers\box2d;bin\drivers\lib\glfw-3.3.4.bin.WIN64\lib-vc2019;bin\drivers\lib\lib\Release\x64;bin\drivers\lib\release static\win64;bin\drivers\lib\x64;bin\drivers\lib;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\release static\win64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib\x64;C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
