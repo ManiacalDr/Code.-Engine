@@ -153,6 +153,7 @@ void Sprite::setCurFrame(int frame)
 
 void Sprite::setAnimation(int frames[], int frameSize)//adds all the frames from the number in frames[i]
 {
+	animation = true;
 	animationList[animationSize] = new glm::mat4x2[frameSize];
 	for (int i = 0; i < frameSize; i++)
 	{
@@ -165,7 +166,7 @@ void Sprite::startAnimation(int animation, int size)
 {
 	if (fpsCount % (int)fps == 0)
 	{
-		std::cout << animationList[animation];
+		//std::cout << animationList[animation];
 		if (frame >= size)
 			frame = 0;
 		curFrame = animationList[animation][frame];

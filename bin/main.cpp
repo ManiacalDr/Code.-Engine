@@ -7,6 +7,7 @@
 #include "render/scene.h"
 #include "render/editor.h"
 #include "collision/collision.hpp"
+#include "main.h"
 
 int main() {
 	Renderer renderer;
@@ -35,22 +36,26 @@ int main() {
 				scene.objects.emplace_back(new Sprite("quit", "assets/textures/menu/quit.png", glm::vec3(326.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "Quit"));
 				break;
 			case RenderMode::GAME:
-				
+				scene.objects.clear();
+				renderer.setScene(&scene);
 				break;
 			case RenderMode::EDITOR:
 				scene.objects.clear();
+				renderer.setCam(glm::vec3(0.0, 0.0, 10));
 				tmp = new Sprite("dragon", glm::mat2x4(1.0f), "assets/animations/picturedragonFrames_thumb.png", glm::vec3(0.0f, -172.585f, 0.0f), 0.0f, glm::vec3(100.0f), "dragon");
 				tmp->setUV(glm::vec2(0, 0), glm::vec2(318, 424), 12, glm::vec2(106, 106));
 				tmpFrames = new int[2]{ 0,1};
 				tmp->setAnimation(tmpFrames, 2);
 				scene.objects.emplace_back(tmp);
-				for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures")) {
+				for (boost::filesystem::directory_entry& entry : boost::filesystem::directory_iterator("assets\\textures\\sprites")) {
 					std::cout << entry.path() << boost::filesystem::extension(entry.path()) << '\n';
 					if (boost::filesystem::extension(entry.path()) == ".jpg" || boost::filesystem::extension(entry.path()) == ".png") {
 						scene.objects.emplace_back(new Sprite(entry.path().stem().string(), entry.path().string(), glm::vec3(xpos, -286.0f, 0.0f), 0.0f, glm::vec3(100.0f), std::to_string(id)));
 						xpos += 150.0f;
 					}
 				}
+				scene.objects.emplace_back(new Sprite("player", "assets/textures/entities/player.png", glm::vec3(xpos, -286.0f, 0.0f), 0.0f, glm::vec3(100.0f), "player"));
+				xpos = -480.0f; 
 				break;
 			default:
 				break;
@@ -66,7 +71,7 @@ int main() {
 		case RenderMode::NONE:
 			break;
 		case RenderMode::GAME:
-			
+			scene.worldStep();
 			break;
 		case RenderMode::EDITOR:
 			break;
@@ -75,6 +80,6 @@ int main() {
 		default:
 			break;
 		}
-		scene.worldStep();
+		
 	} while (renderer.finish);
 }
