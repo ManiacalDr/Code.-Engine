@@ -1,4 +1,29 @@
-﻿  main.cpp
+﻿  sprite.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(36,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(71,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(106,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(184,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(192,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   CodeEngine.vcxproj -> C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\CodeEngine.exe

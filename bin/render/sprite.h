@@ -13,7 +13,7 @@ class Sprite : public Object
 public:
 	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0);
 	std::string name;
-	glm::mat4x2* UV = new  glm::mat4x2(defaultUV); // if applicable
+	glm::mat4x2* UV = new  glm::mat4x2(defaultUV);
 	glm::mat4x2 curFrame;
 	glm::mat4x2** animationList;
 	glm::vec4 color = glm::vec4(1.0);
