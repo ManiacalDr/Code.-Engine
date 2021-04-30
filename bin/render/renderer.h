@@ -64,12 +64,6 @@ public:
 
 	void setScene(Scene* scn) {
 		scene = scn;
-		for (auto i = scn->sprites.begin(); i != scn->sprites.end(); i++) {
-			if ((*i)->ID == "player") {
-				std::cout << "Found player";
-				player = *i;
-			}
-		}
 	}
 
 	void setCam(glm::vec3 c) {
@@ -89,7 +83,6 @@ private:
 	glm::vec3 cam = glm::vec3(0.0, 0.0, 0.0);
 	glm::mat4 mvp = glm::mat4(1.0f);
 	bool pressed[GLFW_KEY_MENU];
-	Object* player = new Object();
 
 	GLFWwindow* window = 0;
 	Editor* editor;

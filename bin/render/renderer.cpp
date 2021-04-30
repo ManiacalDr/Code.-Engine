@@ -40,31 +40,27 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 			mode = RenderMode::EDITOR;
 		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit W";
-			player->position = player->translate(glm::vec3(0.0, speed, 0.0)) * glm::vec4(player->position, 1.0);
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), player->position);
-			//cam = sprite->position;
-			//updateCam(update);
+			playerMove("W");
+			scene->playerSprite->position = scene->playerSprite->translate(glm::vec3(0.0, speed, 0.0)) * glm::vec4(scene->playerSprite->position, 1.0);
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), scene->playerSprite->position);
 		}
 		if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit A";
-			player->position = player->translate(glm::vec3(-speed, 0.0, 0.0)) * glm::vec4(player->position, 1.0);
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), player->position);
-			//cam = sprite->position;
-			//updateCam(update);
+			playerMove("A");
+			scene->playerSprite->position = scene->playerSprite->translate(glm::vec3(-speed, 0.0, 0.0)) * glm::vec4(scene->playerSprite->position, 1.0);
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), scene->playerSprite->position);
 		}
 		if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit S";
-			player->position = player->translate(glm::vec3(0.0, -speed, 0.0)) * glm::vec4(player->position, 1.0);
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), player->position);
-			//cam = sprite->position;
-			//updateCam(update);
+			playerMove("S");
+			scene->playerSprite->position = scene->playerSprite->translate(glm::vec3(0.0, -speed, 0.0)) * glm::vec4(scene->playerSprite->position, 1.0);
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), scene->playerSprite->position);
 		}
 		if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit D";
-			player->position = player->translate(glm::vec3(speed, 0.0, 0.0)) * glm::vec4(player->position, 1.0);
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), player->position);
-			//cam = sprite->position;
-			//updateCam(update);
+			playerMove("D");
+			scene->playerSprite->position = scene->playerSprite->translate(glm::vec3(speed, 0.0, 0.0)) * glm::vec4(scene->playerSprite->position, 1.0);
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), scene->playerSprite->position);
 		}
 		break;
 	case RenderMode::EDITOR:
@@ -72,18 +68,50 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 			mode = RenderMode::GAME;
 		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {//Moves player with playerMove function
 			//std::cout << "Hit W";
-			playerMove("W");
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, speed, 0.0));
+			updateCam(update);
+			// This is not the best solution, slows down editor camera movement with large number of objects
+			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
+				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+				if (tmpSprite != nullptr) {
+					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
+				}
+			}
 		}
 		if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit A";
-			playerMove("A");
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(-speed, 0.0, 0.0));
+			updateCam(update);
+			// This is not the best solution, slows down editor camera movement with large number of objects
+			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
+				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+				if (tmpSprite != nullptr) {
+					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
+				}
+			}
 		}
 		if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			playerMove("S");
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -speed, 0.0));
+			updateCam(update);
+			// This is not the best solution, slows down editor camera movement with large number of objects
+			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
+				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+				if (tmpSprite != nullptr) {
+					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
+				}
+			}
 			//std::cout << "Hit S";
 		}
 		if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
-			playerMove("D");
+			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(speed, 0.0, 0.0));
+			updateCam(update);
+			// This is not the best solution, slows down editor camera movement with large number of objects
+			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
+				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+				if (tmpSprite != nullptr) {
+					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
+				}
+			}
 			//std::cout << "Hit D";
 		}
 		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
@@ -309,13 +337,21 @@ Renderer::Renderer()
 		std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
 		return;// This might need to return an error code of some sort, failed to initlize;
 	}
-
 	FT_Face face;
-	if (FT_New_Face(ft, "C:/Windows/Fonts/arial.ttf", 0, &face)) // This line only works for windows, could need to add something for apple 
+#ifdef _WIN64
+	if (FT_New_Face(ft, "C:/Windows/Fonts/arial.ttf", 0, &face))
 	{
 		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
 		return;// This might need to return an error code of some sort, failed to initlize;
 	}
+#endif
+#ifdef __APPLE__
+	if (FT_New_Face(ft, "C:/System/Library/Fonts/arial.ttf", 0, &face)) 
+	{
+		std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;
+		return;// This might need to return an error code of some sort, failed to initlize;
+	}
+#endif
 
 	FT_Set_Pixel_Sizes(face, 0, 48);
 
@@ -466,41 +502,55 @@ void Renderer::render(Scene& scene) {
 	glUseProgram(ProgramID);
 
 	for (auto i = scene.sprites.begin(); i != scene.sprites.end(); i++) {
-		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-		if (tmpSprite != nullptr) {
-			if (tmpSprite->collider != nullptr)//Makes sure the rendered object is with the collider object at all times
-			{
-				tmpSprite->colliderTranslate();
+		try
+		{
+			Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+			if (tmpSprite != nullptr) {
+				if (tmpSprite->collider != nullptr)//Makes sure the rendered object is with the collider object at all times
+				{
+					tmpSprite->colliderTranslate();
+				}
+				mvp = p * v * (*i)->getModel();
+
+				glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->curFrame[0][0]));
+				glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
+				glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
+
+				glBindVertexArray(VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
-			mvp = p * v * (*i)->getModel();
+		}
+		catch (const std::exception&)
+		{
 
-			glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->curFrame[0][0]));
-			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
-			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
-
-			glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, 6);
 		}
 	}
 
 	for (auto i = scene.objects.begin(); i != scene.objects.end(); i++) {
-		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-		if (tmpSprite != nullptr) {
-			if (tmpSprite->collider != nullptr)
-			{
-				tmpSprite->colliderTranslate();
-			}
-			mvp = p * v * (*i)->getModel();
-			if(tmpSprite)
-				glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
-			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
-			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
+		try
+		{
+			Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
+			if (tmpSprite != nullptr) {
+				if (tmpSprite->collider != nullptr)
+				{
+					tmpSprite->colliderTranslate();
+				}
+				mvp = p * v * (*i)->getModel();
+				if (tmpSprite)
+					glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
+				glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
+				glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
-			glBindVertexArray(VAO);
-			glDrawArrays(GL_TRIANGLES, 0, 6);
+				glBindVertexArray(VAO);
+				glDrawArrays(GL_TRIANGLES, 0, 6);
+			}
+		}
+		catch (const std::exception&)
+		{
+
 		}
 	}
-
+	static float val = 10;
 	Object* sprite = new Object();
 	switch (Renderer::mode)
 	{
@@ -508,11 +558,16 @@ void Renderer::render(Scene& scene) {
 		RenderText("Code.", -505.0f, 322.0f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 		break;
 	case RenderMode::GAME:
-		cam = glm::vec3(player->position.x + player->scaleValue.x/2, player->position.y + player->scaleValue.y/2, 10);
+		cam = glm::vec3(scene.playerSprite->position.x + scene.playerSprite->scaleValue.x/2, scene.playerSprite->position.y + scene.playerSprite->scaleValue.y/2, 10);
 		v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
-		//updateCam(glm::translate(glm::mat4(1.0), sprite->position));
 		break;
 	case RenderMode::EDITOR:
+		
+		RenderText("left click to select sprite", 210.0f, 322.0f, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
+		RenderText("Right click to edit sprite in scene", 210.0f, 322.0f - val, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
+		RenderText("Ctrl + left click to remove sprite", 210.0f, 322.0f - val*2, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
+		RenderText("hit R to reset camera", 210.0f, 322.0f - val*3, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
+		RenderText("hit G to switch between game and editor", 210.0f, 322.0f - val*4, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
 
 		//glViewport(0, 0, 1080, 250);
 		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
