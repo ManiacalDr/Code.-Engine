@@ -44,6 +44,7 @@ struct Character {
 class Renderer
 {
 public:
+
 	Renderer();
 	~Renderer();
 	void render(Scene&);
@@ -74,6 +75,8 @@ public:
 	void setCam(glm::vec3 c) {
 		cam = c;
 	}
+
+	void playerMove(std::string);
 
 private:
 	GLuint VBO = 0, VAO = 0, textVAO = 0, textVBO = 0;
