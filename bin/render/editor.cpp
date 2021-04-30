@@ -19,10 +19,12 @@ void Editor::render()
 	bool player = false;
 
 	int uvSetx = 318;
-	int uvSety = 424;
+	int uvSety = 424;//Size of total picture
 	int frameSizex = 106;
-	int frameSizey = 106;
-	int frames = 12;
+	int frameSizey = 106;//Size of each frame. Later is frame/uv to get the Uv coords
+	int frames = 12;//Default UV options for dragon
+
+
 	if (editable != NULL) {
 		ImGui::Begin("Edit Sprite");
 		ImGui::InputFloat("position x", &editable->position.x);
@@ -31,12 +33,12 @@ void Editor::render()
 		ImGui::SliderFloat("rotation", &editable->rotation, 0.0f, 360.0f);
 		ImGui::InputFloat("scale x", &editable->scaleValue.x);
 		ImGui::InputFloat("scale y", &editable->scaleValue.y);
-		if (mysprite->collider==nullptr)
+		if (mysprite->collider==nullptr)//Shows tabs for Active or Passive Collider. Active is moving, while Passive is not.
 		{
 			ImGui::Checkbox("addActiveCollider", &active);
 			ImGui::Checkbox("addPassiveCollider", &passive);
 		}
-		if (mysprite->UV == nullptr) {
+		if (mysprite->UV == nullptr) {//Shows tabs to set up and use a sprite sheet
 			ImGui::Text("Sprite Sheet Settings");
 			ImGui::InputInt("spriteSheetSizeX",&uvSetx);
 			ImGui::InputInt("spriteSheetSizeY", &uvSety);
@@ -45,11 +47,10 @@ void Editor::render()
 			ImGui::InputInt("number of frames", &frames);
 			ImGui::Checkbox("useSpriteSheet", &spriteSheet);
 		}
-			if (mysprite->scene->playerSprite != mysprite)
+			if (mysprite->scene->playerSprite != mysprite)//If this object is not a player, set up tab to make it the player
 			{
 				ImGui::Checkbox("makePlayer", &player);
 			}
-		//mysprite->spriteTranslate();
 		ImGui::End();
 	}
 	if (active && mysprite->collider == nullptr)
@@ -60,10 +61,7 @@ void Editor::render()
 	{
 		mysprite->addCollider(false);
 	}
-	else if (active && mysprite->collider != nullptr) {
-		mysprite->removeCollier();
-	}
-	if (spriteSheet && mysprite->UV == nullptr)
+	if (spriteSheet && mysprite->UV == nullptr)//Default set up for dragon UV and animation
 	{
 		mysprite->setUV(glm::vec2(0, 0), glm::vec2(uvSetx, uvSety), frames, glm::vec2(frameSizex, frameSizey));
 		int* tmpFrames = new int[3]{ 0,1,2 };
@@ -75,7 +73,7 @@ void Editor::render()
 		tmpFrames = new int[3]{ 9,10,11 };
 		mysprite->setAnimation("upWalk", tmpFrames, 3);
 	}
-	if(mysprite!=nullptr)
+	if(mysprite!=nullptr)//Makes sprite Player
 		if (player && mysprite->scene->playerSprite != mysprite)
 		{
 			mysprite->makePlayer();

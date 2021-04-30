@@ -25,7 +25,7 @@ public:
 	const float P2M = 1 / M2P;
 
 
-	b2Body* addRect(Scene* scene, int x, int y, int w, int h, bool dyn = true)
+	b2Body* addRect(Scene* scene, int x, int y, int w, int h, bool dyn = true)//Creates world where box colliders live
 	{
 		setScene(scene);
 		b2BodyDef bodydef;
