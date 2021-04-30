@@ -14,6 +14,7 @@ class Sprite : public Object
 public:
 	const glm::mat4x2 defaultUV = glm::mat4x2(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0);
 	std::string name;
+	glm::vec4 color = glm::vec4(1.0);
 	glm::mat4x2* UV; //UV is the list of all frames once set up
 	glm::mat4x2 curFrame;//Is either the defaultUV or the current frame of UV
 	std::map<std::string, glm::mat4x2* > animationList;//Stores animation names and frames together

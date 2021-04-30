@@ -34,3 +34,14 @@
 .vs/CodeEngine/v16/Browse.VC.db-wal
 .vs/CodeEngine/v16/Browse.VC.db-shm
 .vs/CodeEngine/v16/.suo
+x64/Debug/CodeEngine.tlog/CL.command.1.tlog
+*.tlog
+*.tlog
+*.lastbuildstate
+x64/Debug/CodeEngine.tlog/CodeEngine.lastbuildstate
+*.log
+*.pdb
+*.idb
+x64/Debug/vc142.idb
+CodeEngine.vcxproj
+imgui.ini
