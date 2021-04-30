@@ -12,6 +12,7 @@ class Scene
 public:
 	Object* root;
 	b2World* world;
+	Object* playerSprite;
 	std::vector<Object*> objects;
 	std::vector<Object*> sprites;
 
