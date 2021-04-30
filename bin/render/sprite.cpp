@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 #include <cmath>
+#include <windows.h>
+#include< MMsystem.h>
 
 #include "stb_image.h"
 
@@ -206,6 +208,7 @@ void Sprite::playerControl(std::string key)
 		else
 		{
 			this->collider->ApplyLinearImpulseToCenter(b2Vec2(0, 50), true);
+			PlaySound(TEXT("DragonRoar.wav"), NULL, SND_SYNC);
 		}
 	}
 	else if (key == "A")
@@ -227,5 +230,7 @@ void Sprite::playerControl(std::string key)
 		this->position = glm::vec3(position.x+5, position.y, position.z);
 		startAnimation("rightWalk", 3);
 	}
+
+	
 	spriteTranslate();
 }
