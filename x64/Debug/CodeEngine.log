@@ -2,18 +2,9 @@
   Animator.cpp
   main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\main.cpp(16,7): warning C4101: 'tmpFrames': unreferenced local variable
   editor.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\editor.cpp(70,50): error C2660: 'Sprite::setAnimation': function does not take 3 arguments
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(45,7): message : see declaration of 'Sprite::setAnimation'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\editor.cpp(72,50): error C2660: 'Sprite::setAnimation': function does not take 3 arguments
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(45,7): message : see declaration of 'Sprite::setAnimation'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\editor.cpp(74,51): error C2660: 'Sprite::setAnimation': function does not take 3 arguments
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(45,7): message : see declaration of 'Sprite::setAnimation'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\editor.cpp(76,48): error C2660: 'Sprite::setAnimation': function does not take 3 arguments
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(45,7): message : see declaration of 'Sprite::setAnimation'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\editor.cpp(81,14): error C2039: 'makePlayer': is not a member of 'Sprite'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(11): message : see declaration of 'Sprite'
   imgui.cpp
   imgui_demo.cpp
   imgui_draw.cpp
@@ -22,40 +13,39 @@ C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.h(11): mes
   imgui_tables.cpp
   imgui_widgets.cpp
   renderer.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(390,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(497,36): warning C4305: 'initializing': truncation from 'int' to 'char'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(497,30): warning C4309: 'initializing': truncation of constant value
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(564,29): warning C4390: ';': empty controlled statement found; is this the intent?
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\renderer.cpp(357,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\renderer.cpp(464,36): warning C4305: 'initializing': truncation from 'int' to 'char'
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\renderer.cpp(464,30): warning C4309: 'initializing': truncation of constant value
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\renderer.cpp(525,29): warning C4390: ';': empty controlled statement found; is this the intent?
   scene.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(20,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(26,28): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\scene.cpp(10,10): fatal error C1083: Cannot open include file: 'jsoncons/json.hpp': No such file or directory
   shaderLoader.cpp
   sprite.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(36,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(71,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(106,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(36,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(71,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(106,139): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(117,106): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(117,87): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(117,68): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(117,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(117,51): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(184,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(192,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(180,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\alexb\source\repos\GitHub\Code.-Engine\bin\render\sprite.cpp(188,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
