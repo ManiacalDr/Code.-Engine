@@ -117,23 +117,17 @@ void Sprite::addCollider(bool dyn)
 	collider = collision.addRect(scene,this->position.x,this->position.y,this->scaleValue.x,this->scaleValue.y,dyn);
 }
 
-void Sprite::removeCollier() {
-
-	collider = nullptr;
-}
-
 void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize) {
 	UV = new glm::mat4x2[frames];
-	animationList = new glm::mat4x2*;
 	glm::vec2 first = start;
 	for (int i = 0; i < frames; i++)
 	{
-		if (first.x > end.x)//if row is done, go to the next one
+		if (first.x >= end.x)//if row is done, go to the next one
 		{
 			first.x = start.x;
 			first.y += frameSize.y;
 		}
-		if (first.y > end.y)//if the whole page is done before i=frames, then it breaks;
+		if (first.y >= end.y)//if the whole page is done before i=frames, then it breaks;
 		{
 			break;
 		}
@@ -144,6 +138,7 @@ void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSi
 		UV[i] = frameSet;//marks one frame
 		first.x += frameSize.x;
 	}
+	curFrame = UV[0];
 }
 
 void Sprite::setCurFrame(int frame)
@@ -151,28 +146,29 @@ void Sprite::setCurFrame(int frame)
 	curFrame = UV[frame];
 }
 
-void Sprite::setAnimation(int frames[], int frameSize)//adds all the frames from the number in frames[i]
+void Sprite::setAnimation(std::string animationName,int frames[], int frameSize)//adds all the frames from the number in frames[i]
 {
-	animation = true;
-	animationList[animationSize] = new glm::mat4x2[frameSize];
+	animationList[animationName] = new glm::mat4x2[frameSize];
 	for (int i = 0; i < frameSize; i++)
 	{
-		animationList[animationSize][i] = UV[frames[i]];
+		animationList[animationName][i] = UV[frames[i]];
 	}
-	animationSize++;
 }
 
-void Sprite::startAnimation(int animation, int size)
+void Sprite::startAnimation(std::string animationName, int size)
 {
-	if (fpsCount % (int)fps == 0)
+	if (UV != nullptr)
 	{
-		//std::cout << animationList[animation];
-		if (frame >= size)
-			frame = 0;
-		curFrame = animationList[animation][frame];
-		frame++;
+		if (fpsCount % (int)fps == 0)
+		{
+			if (frame >= size)
+				frame = 0;
+			curFrame = animationList[animationName][frame];
+			frame++;
+			fpsCount = 1;
+		}
+		fpsCount++;
 	}
-	fpsCount++;
 }
 
 void Sprite::colliderTranslate()
@@ -191,4 +187,45 @@ void Sprite::spriteTranslate()
 	{
 		collider->SetTransform(b2Vec2(this->position.x * P2M, this->position.y * P2M), this->rotation / (180.0 / 3.141592653589793238463));
 	}
+}
+
+void Sprite::makePlayer()
+{
+	this->scene->playerSprite = this;
+}
+
+void Sprite::playerControl(std::string key)
+{
+	if (key == "W")
+	{
+		if (this->collider == nullptr)
+		{
+			this->position = glm::vec3(position.x, position.y + 5, position.z);
+			startAnimation("upWalk", 3);
+		}
+		else
+		{
+			this->collider->ApplyLinearImpulseToCenter(b2Vec2(0, 50), true);
+		}
+	}
+	else if (key == "A")
+	{
+		this->position = glm::vec3(position.x-5, position.y, position.z);
+		startAnimation("leftWalk", 3);
+	}
+	else if (key == "S")
+	{
+		if (this->collider == nullptr)
+		{
+			this->position = glm::vec3(position.x, position.y - 5, position.z);
+			startAnimation("downWalk", 3);
+		}
+
+	}
+	else if (key == "D")
+	{
+		this->position = glm::vec3(position.x+5, position.y, position.z);
+		startAnimation("rightWalk", 3);
+	}
+	spriteTranslate();
 }

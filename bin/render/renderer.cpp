@@ -70,54 +70,21 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 	case RenderMode::EDITOR:
 		if (key == GLFW_KEY_G && (action == GLFW_REPEAT || action == GLFW_PRESS))
 			mode = RenderMode::GAME;
-		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {//Moves player with playerMove function
 			//std::cout << "Hit W";
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, speed, 0.0));
-			updateCam(update);
-
-			// This is not the best solution, slows down editor camera movement with large number of objects
-			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
-				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-				if (tmpSprite != nullptr) {
-					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
-				}
-			}
+			playerMove("W");
 		}
 		if (key == GLFW_KEY_A && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
 			//std::cout << "Hit A";
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(-speed, 0.0, 0.0));
-			updateCam(update);
-			// This is not the best solution, slows down editor camera movement with large number of objects
-			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
-				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-				if (tmpSprite != nullptr) {
-					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
-				}
-			}
+			playerMove("A");
 		}
 		if (key == GLFW_KEY_S && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			playerMove("S");
 			//std::cout << "Hit S";
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(0.0, -speed, 0.0));
-			updateCam(update);
-			// This is not the best solution, slows down editor camera movement with large number of objects
-			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
-				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-				if (tmpSprite != nullptr) {
-					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
-				}
-			}
 		}
 		if (key == GLFW_KEY_D && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
+			playerMove("D");
 			//std::cout << "Hit D";
-			glm::mat4 update = glm::translate(glm::mat4(1.0f), glm::vec3(speed, 0.0, 0.0));
-			updateCam(update);
-			// This is not the best solution, slows down editor camera movement with large number of objects
-			for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
-				Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
-				if (tmpSprite != nullptr) {
-					tmpSprite->position = glm::vec3(update * glm::vec4(tmpSprite->position, 1.0));
-				}
-			}
 		}
 		if (key == GLFW_KEY_R && action == GLFW_PRESS) {
 			cam = glm::vec3(0.0);
@@ -212,7 +179,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 					else if (objHit == false && (*editor).selection != NULL && (*editor).editable == NULL) {
 						Sprite* tmpSprite = dynamic_cast<Sprite*>((*editor).selection);
 						if (tmpSprite != nullptr) {
-							scene->sprites.emplace_back(new Sprite((scene),true,(*tmpSprite).name, *((*tmpSprite).UV), (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
+							scene->sprites.emplace_back(new Sprite((scene),true,(*tmpSprite).name, (*tmpSprite).curFrame, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
 						}
 					}
 					break;
@@ -501,13 +468,12 @@ void Renderer::render(Scene& scene) {
 	for (auto i = scene.sprites.begin(); i != scene.sprites.end(); i++) {
 		Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 		if (tmpSprite != nullptr) {
-			if (tmpSprite->collider != nullptr)
+			if (tmpSprite->collider != nullptr)//Makes sure the rendered object is with the collider object at all times
 			{
 				tmpSprite->colliderTranslate();
 			}
 			mvp = p * v * (*i)->getModel();
 
-			glUniform4fv(COLOR, 1, &(tmpSprite->color[0]));
 			glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->curFrame[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
@@ -525,13 +491,8 @@ void Renderer::render(Scene& scene) {
 				tmpSprite->colliderTranslate();
 			}
 			mvp = p * v * (*i)->getModel();
-			if (tmpSprite->animation == true)
-			{
-				tmpSprite->startAnimation(0,2);
-			}
-
-			glUniform4fv(COLOR,1 ,&(tmpSprite->color[0]));
-			glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
+			if(tmpSprite)
+				glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
 			glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
 			glBindTexture(GL_TEXTURE_2D, (*tmpSprite).texture);
 
@@ -580,6 +541,16 @@ void Renderer::render(Scene& scene) {
 
 	if (glfwWindowShouldClose(window)) { finish = false; }
 	//reportError("render");
+}
+
+void Renderer::playerMove(std::string key)
+{
+	if (scene->playerSprite != nullptr)
+	{
+		Sprite* tmpSprite = dynamic_cast<Sprite*>(scene->playerSprite);
+		tmpSprite->playerControl(key);
+	}
+
 }
 
 Renderer::~Renderer()
