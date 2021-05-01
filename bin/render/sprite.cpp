@@ -6,7 +6,7 @@
 #include <vector>
 #include <cmath>
 #include <windows.h>
-#include< MMsystem.h>
+#include<MMsystem.h>
 
 #include "stb_image.h"
 
@@ -208,7 +208,7 @@ void Sprite::playerControl(std::string key)
 		else
 		{
 			this->collider->ApplyLinearImpulseToCenter(b2Vec2(0, 50), true);
-			PlaySound(TEXT("DragonRoar.wav"), NULL, SND_SYNC);
+			PlaySound(TEXT("assets\\audio\\DragonRoar.wav"), NULL, SND_SYNC);
 		}
 	}
 	else if (key == "A")

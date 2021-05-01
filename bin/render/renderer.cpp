@@ -148,11 +148,11 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 	bool spriteHit = false, objHit = false;
 	Object* sprite = new Object(), *object = new Object();
 
-	for (auto i = scene->sprites.begin(); i != scene->sprites.end(); i++) {
+	for (auto i = (*scene).sprites.begin(); i != (*scene).sprites.end(); i++) {
 		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
 			std::cout << "\nObject was hit\n";
 			spriteHit = true;
-			delete sprite;
+			sprite = nullptr;
 			sprite = *i;
 		}
 	}
@@ -161,7 +161,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
 			std::cout << "\nObject was hit\n";
 			objHit = true;
-			delete object;
+			object = nullptr;
 			object = *i;
 		}
 	}
@@ -493,7 +493,7 @@ void Renderer::RenderText(std::string text, float x, float y, float scale, glm::
 	glUseProgram(ProgramID);
 }
 
-void Renderer::render(Scene& scene) {
+void Renderer::render(Scene* scene) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -501,16 +501,15 @@ void Renderer::render(Scene& scene) {
 
 	glUseProgram(ProgramID);
 
-	for (auto i = scene.sprites.begin(); i != scene.sprites.end(); i++) {
-		try
-		{
+	for (auto i = scene->sprites.begin(); i != scene->sprites.end(); i++) {
+		
 			Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 			if (tmpSprite != nullptr) {
 				if (tmpSprite->collider != nullptr)//Makes sure the rendered object is with the collider object at all times
 				{
 					tmpSprite->colliderTranslate();
 				}
-				mvp = p * v * (*i)->getModel();
+				mvp = p * v * tmpSprite->getModel();
 
 				glUniformMatrix4x2fv(UV, 1, GL_FALSE, &(tmpSprite->curFrame[0][0]));
 				glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
@@ -519,23 +518,17 @@ void Renderer::render(Scene& scene) {
 				glBindVertexArray(VAO);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
-		}
-		catch (const std::exception&)
-		{
 
-		}
 	}
 
-	for (auto i = scene.objects.begin(); i != scene.objects.end(); i++) {
-		try
-		{
+	for (auto i = scene->objects.begin(); i != scene->objects.end(); i++) {
 			Sprite* tmpSprite = dynamic_cast<Sprite*>(*i);
 			if (tmpSprite != nullptr) {
 				if (tmpSprite->collider != nullptr)
 				{
 					tmpSprite->colliderTranslate();
 				}
-				mvp = p * v * (*i)->getModel();
+				mvp = p * v * tmpSprite->getModel();
 				if (tmpSprite)
 					glUniformMatrix4x2fv(UV, 1, false, &(tmpSprite->curFrame[0][0]));
 				glUniformMatrix4fv(MVP, 1, GL_FALSE, &mvp[0][0]);
@@ -544,11 +537,6 @@ void Renderer::render(Scene& scene) {
 				glBindVertexArray(VAO);
 				glDrawArrays(GL_TRIANGLES, 0, 6);
 			}
-		}
-		catch (const std::exception&)
-		{
-
-		}
 	}
 	static float val = 10;
 	Object* sprite = new Object();
@@ -558,7 +546,7 @@ void Renderer::render(Scene& scene) {
 		RenderText("Code.", -505.0f, 322.0f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 		break;
 	case RenderMode::GAME:
-		cam = glm::vec3(scene.playerSprite->position.x + scene.playerSprite->scaleValue.x/2, scene.playerSprite->position.y + scene.playerSprite->scaleValue.y/2, 10);
+		cam = glm::vec3(scene->playerSprite->position.x + scene->playerSprite->scaleValue.x/2, scene->playerSprite->position.y + scene->playerSprite->scaleValue.y/2, 10);
 		v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
 		break;
 	case RenderMode::EDITOR:

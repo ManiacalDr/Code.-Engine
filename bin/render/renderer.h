@@ -47,7 +47,7 @@ public:
 
 	Renderer();
 	~Renderer();
-	void render(Scene&);
+	void render(Scene*);
 	void updateScene(Scene* scn) {
 		scene = scn;
 	}

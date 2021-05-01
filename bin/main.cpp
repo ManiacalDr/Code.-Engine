@@ -72,7 +72,7 @@ int main() {
 
 
 		//scene.update();
-		renderer.render(scene);
+		renderer.render(&scene);
 
 		switch (mode)
 		{
