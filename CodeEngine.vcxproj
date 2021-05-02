@@ -36,6 +36,7 @@
     <ClCompile Include="bin\render\sprite.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="audio.h" />
     <ClInclude Include="bin\collision\collision.hpp" />
     <ClInclude Include="bin\main.h" />
     <ClInclude Include="bin\render\editor.h" />

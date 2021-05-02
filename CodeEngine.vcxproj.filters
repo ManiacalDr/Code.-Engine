@@ -110,5 +110,8 @@
     <ClInclude Include="bin\main.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="audio.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

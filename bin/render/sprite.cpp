@@ -7,6 +7,7 @@
 #include <cmath>
 #include <windows.h>
 #include<MMsystem.h>
+#include "audio.h"
 
 #include "stb_image.h"
 
@@ -26,6 +27,8 @@
 #include <box2d/box2d.h>
 #include "scene.h"
 #include <time.h>
+
+Playaudio currentlyplaying;
 
 Sprite::Sprite() {
 
@@ -208,17 +211,19 @@ void Sprite::playerControl(std::string key)
 		{
 			this->position = glm::vec3(position.x, position.y + 5, position.z);
 			startAnimation("upWalk", 3);
+			currentlyplaying.DragonSteps();
 		}
 		else
 		{
 			this->collider->ApplyLinearImpulseToCenter(b2Vec2(0, 50), true);
-			//PlaySound(TEXT("assets\\audio\\DragonRoar.wav"), NULL, SND_SYNC);
+			currentlyplaying.DragonRoar();
 		}
 	}
 	else if (key == "A")
 	{
 		this->position = glm::vec3(position.x-5, position.y, position.z);
 		startAnimation("leftWalk", 3);
+		currentlyplaying.DragonSteps();
 	}
 	else if (key == "S")
 	{
@@ -226,6 +231,7 @@ void Sprite::playerControl(std::string key)
 		{
 			this->position = glm::vec3(position.x, position.y - 5, position.z);
 			startAnimation("downWalk", 3);
+			currentlyplaying.DragonSteps();
 		}
 
 	}
@@ -233,6 +239,7 @@ void Sprite::playerControl(std::string key)
 	{
 		this->position = glm::vec3(position.x+5, position.y, position.z);
 		startAnimation("rightWalk", 3);
+		currentlyplaying.DragonSteps();
 	}
 
 	
