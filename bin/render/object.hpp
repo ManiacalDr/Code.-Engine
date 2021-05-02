@@ -25,7 +25,7 @@ public:
 	glm::mat4 getModel() {return translate(position) * rotate(rotation) * scale(scaleValue);}
 	glm::mat4 translate(glm::vec3 m) { return glm::translate(glm::mat4(1.0f), m); }
 	glm::mat4 rotate(float r) { return glm::rotate(glm::mat4(1.0f), glm::radians(r), glm::vec3(0.0f, 0.0f, 1.0f)); }
-	glm::mat4 scale(glm::vec3 s) { return glm::scale(glm::mat4(1.0f), s); } // return glm::translate(temp, glm::vec3(s.x / 2, s.y / 2, s.z / 2));
+	glm::mat4 scale(glm::vec3 s) { return glm::scale(glm::mat4(1.0f), s); }
 
 
 	void virtual addLink(Object o) {

@@ -36,6 +36,9 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 	switch (mode)
 	{
 	case RenderMode::GAME:
+		if (key == GLFW_KEY_PERIOD && (action == GLFW_PRESS)) {
+			
+		}
 		if (key == GLFW_KEY_G && (action == GLFW_REPEAT || action == GLFW_PRESS))
 			mode = RenderMode::EDITOR;
 		if (key == GLFW_KEY_W && (action == GLFW_REPEAT || action == GLFW_PRESS)) {
@@ -127,8 +130,13 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 }
 
 void Renderer::mouse_button_callback(int button, int action, int mods) {
+	static float layer = 0.0;
+	bool spriteHit = false, objHit = false;
+	Object* sprite = new Object(), * object = new Object();
 	double xpos, ypos;
 	int width, height;
+	std::vector<Object*>::iterator playerSprite = scene->sprites.end();
+
 	glfwGetCursorPos(window, &xpos, &ypos);
 	glfwGetWindowSize(window, &width, &height);
 
@@ -136,36 +144,36 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 
 	glm::vec4 temp = glm::vec4((2.0f * ((float)(xpos - 0) / ((float)width))) - 1.0f, 1.0f - (2.0f * ((float)ypos / height)), 0, 1.0);
 	glm::vec3 pos = temp * inverse;
-	pos += cam;
+	if (action == GLFW_PRESS) {
+		pos += cam;
 
-	//pos.w = 1.0 / pos.w;
-	//pos.x *= pos.w;
-	//pos.y *= pos.w;
-	//pos.z *= pos.w;
+		//pos.w = 1.0 / pos.w;
+		//pos.x *= pos.w;
+		//pos.y *= pos.w;
+		//pos.z *= pos.w;
 
-	std::cout << std::endl << pos.x << " " << pos.y << std::endl;
+		std::cout << std::endl << pos.x << " " << pos.y << std::endl;
 
-	bool spriteHit = false, objHit = false;
-	Object* sprite = new Object(), *object = new Object();
+		for (auto i = (*scene).sprites.begin(); i != (*scene).sprites.end(); i++) {
+			if ((**i).ID == "PlayerStart")
+				playerSprite = i;
+			if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
+				std::cout << "\nObject was hit\n";
+				spriteHit = true;
+				sprite = nullptr;
+				sprite = *i;
+			}
+		}
 
-	for (auto i = (*scene).sprites.begin(); i != (*scene).sprites.end(); i++) {
-		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
-			std::cout << "\nObject was hit\n";
-			spriteHit = true;
-			sprite = nullptr;
-			sprite = *i;
+		for (auto i = (*scene).objects.begin(); i != (*scene).objects.end(); i++) {
+			if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
+				std::cout << "\nObject was hit\n";
+				objHit = true;
+				object = nullptr;
+				object = *i;
+			}
 		}
 	}
-
-	for (auto i = (*scene).objects.begin(); i != (*scene).objects.end(); i++) {
-		if (((**i).position.x < pos.x && (**i).position.x + (**i).scaleValue.x > pos.x) && ((**i).position.y < pos.y && (**i).position.y + (**i).scaleValue.y > pos.y)) {
-			std::cout << "\nObject was hit\n";
-			objHit = true;
-			object = nullptr;
-			object = *i;
-		}
-	}
-
 	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS) {
 
 				switch (mode)
@@ -197,7 +205,7 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 						}
 						editor->makeSelection(object);
 					}
-					if (spriteHit == true) {
+					else if (spriteHit == true) {
 						if (pressed[GLFW_KEY_LEFT_CONTROL]) {
 							auto temp = std::find(scene->sprites.begin(), scene->sprites.end(), sprite);
 							scene->sprites.erase(temp);
@@ -205,15 +213,26 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 						}
 					}
 					else if (objHit == false && (*editor).selection != NULL && (*editor).editable == NULL) {
+						if ((*editor).selection->ID == "PlayerStart") {
+							std::cout << "\n Set Player Position";
+							if(playerSprite != scene->sprites.end())
+								scene->sprites.erase(playerSprite);
+							scene->playerStart = glm::vec3(pos.x , pos.y, 0.0f);
+							std::cout << std::endl << pos.x - ((*editor).selection->scaleValue.x / 2) << " " << pos.y - ((*editor).selection->scaleValue.y / 2) << std::endl;
+						}
 						Sprite* tmpSprite = dynamic_cast<Sprite*>((*editor).selection);
 						if (tmpSprite != nullptr) {
-							scene->sprites.emplace_back(new Sprite((scene),true,(*tmpSprite).name, (*tmpSprite).curFrame, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), 0.0f), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
+							layer -= 1;
+							scene->sprites.emplace(scene->sprites.begin(),new Sprite(true,(*tmpSprite).name, (*tmpSprite).curFrame, (*tmpSprite).texture, glm::vec3(pos.x - ((*tmpSprite).scaleValue.x / 2), pos.y - ((*tmpSprite).scaleValue.y / 2), layer), 0.0f, (*tmpSprite).scaleValue, (*tmpSprite).ID));
 						}
 					}
 					break;
 				case RenderMode::MENU:
 					if (objHit == true) {
-						if (object->ID == "Start") mode = RenderMode::GAME;
+						if (object->ID == "Start") {
+							mode = RenderMode::GAME;
+							scene->readSprites("assets/scenes/test");
+						}
 						if (object->ID == "Editor") {
 							mode = RenderMode::EDITOR;
 						}
@@ -435,7 +454,7 @@ Renderer::Renderer()
 
 	p = glm::ortho(-(1080.0f / 2.0f), (1080.0f / 2.0f),
 		-(768.0f / 2.0f), (768.0f / 2.0f),
-		-1000.0f, 1000.0f);
+		-1.0f, 10000.0f);
 	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z+10)), glm::vec3(0.0, 1.0, 0.0));
 	glm::mat4 m = glm::mat4(1.0);
 	mvp = p * v * m;
@@ -497,7 +516,7 @@ void Renderer::render(Scene* scene) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-	static char* buf = new char('asd');
+	static char buf[20] = "Name File Here";
 
 	glUseProgram(ProgramID);
 
@@ -546,7 +565,11 @@ void Renderer::render(Scene* scene) {
 		RenderText("Code.", -505.0f, 322.0f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
 		break;
 	case RenderMode::GAME:
-		cam = glm::vec3(scene->playerSprite->position.x + scene->playerSprite->scaleValue.x/2, scene->playerSprite->position.y + scene->playerSprite->scaleValue.y/2, 10);
+		if(scene->playerSprite == nullptr)
+			RenderText("ERROR: Player Sprite not set", -400.0f, 0.0f, 1.0f, glm::vec3(0.3, 0.7f, 0.9f));
+		else {
+			cam = glm::vec3(scene->playerSprite->position.x + scene->playerSprite->scaleValue.x / 2, scene->playerSprite->position.y + scene->playerSprite->scaleValue.y / 2, 10);
+		}
 		v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
 		break;
 	case RenderMode::EDITOR:
@@ -565,8 +588,25 @@ void Renderer::render(Scene* scene) {
 		ImGui::NewFrame();
 
 		//ImGui::Text("Hello, world %d", 123);
-		if (ImGui::Button("Save"));
-			//MySaveFunction();
+		if (ImGui::Button("Save")) {
+			int size = sizeof(buf) / sizeof(char);
+			int i;
+			std::string s = "assets/scenes/";
+			for (i = 0; i < size; i++) {
+				if(buf[i] != ' ')
+					s = s + buf[i];
+			}
+			scene->saveSprites(s);
+		}
+		if (ImGui::Button("Load")) {
+			int size = sizeof(buf) / sizeof(char);
+			int i;
+			std::string s = "assets/scenes/";
+			for (i = 0; i < size; i++) {
+				s = s + buf[i];
+			}
+			scene->readSprites(s);
+		}
 		ImGui::InputText("string", buf, (int)(sizeof(buf)/sizeof(*buf)));
 
 		(*editor).render();

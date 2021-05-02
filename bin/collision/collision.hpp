@@ -10,14 +10,8 @@
 
 class Collision {
 public:
-	Scene* scene;
-
 	Collision() {};
 	~Collision() {};
-
-	void setScene(Scene* scn) {
-		scene = scn;
-	}
 
 	const int WIDTH = 640;
 	const int HEIGHT = 480;
@@ -27,7 +21,6 @@ public:
 
 	b2Body* addRect(Scene* scene, int x, int y, int w, int h, bool dyn = true)//Creates world where box colliders live
 	{
-		setScene(scene);
 		b2BodyDef bodydef;
 		bodydef.position.Set(x * P2M, y * P2M);
 		if (dyn)
@@ -43,7 +36,6 @@ public:
 		body->CreateFixture(&fixturedef);
 
 		return body;
-
 	}
 };
 

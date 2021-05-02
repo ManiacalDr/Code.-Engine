@@ -23,7 +23,6 @@ public:
 	GLuint texture;
 	Collision collision;
 	b2Body* collider;
-	Scene* scene;
 
 	const float M2P = 32;
 	const float P2M = 1 / M2P;
@@ -35,9 +34,9 @@ public:
 	Sprite(std::string n) { name = n; }
 	Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
 	Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
-	Sprite(Scene* scene,bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i);
+	Sprite(bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i);
 
-	void addCollider(bool);
+	void addCollider(bool, Scene*);
 
 	void setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize);//Sets up UV map
 	void setAnimation(std::string, int frames[], int frameSize);//Sets up animation
@@ -47,8 +46,14 @@ public:
 	void colliderTranslate();//translates sprite to collider
 	void spriteTranslate();//translates collider to sprite
 
-	void makePlayer();//makes sprite the player
+	void makePlayer(Scene*);//makes sprite the player
+	void makeEnemy(Scene*);
 	void playerControl(std::string);//Move player
+
+	void print() {
+		std::cout << name << " " << position.x << " " << position.y << " " << position.z << std::endl;
+		
+	};
 
 private:
 

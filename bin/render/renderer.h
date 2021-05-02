@@ -50,25 +50,25 @@ public:
 	void render(Scene*);
 	void updateScene(Scene* scn) {
 		scene = scn;
-	}
+	};
 
 	bool finish = true;
 
 	RenderMode getMode() {
 		return mode;
-	}
+	};
 
 	void setEditor(Editor* edi) {
 		editor = edi;
-	}
+	};
 
 	void setScene(Scene* scn) {
 		scene = scn;
-	}
+	};
 
 	void setCam(glm::vec3 c) {
 		cam = c;
-	}
+	};
 
 	void playerMove(std::string);
 
@@ -88,7 +88,7 @@ private:
 	Editor* editor;
 	Scene* scene;
 
-	RenderMode mode = RenderMode::EDITOR;
+	RenderMode mode = RenderMode::MENU;
 	std::map<char, Character> Characters;
 
 	void KeyboardCB(int key, int scancode, int action, int mods);
@@ -114,18 +114,21 @@ private:
 	static void KeyboardCB(GLFWwindow* window, int key, int scancode, int action, int mods) {
 		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
 		renderer->KeyboardCB(key, scancode, action, mods);
-	}
+	};
 
 	static void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
 		//Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
 		//renderer->framebuffer_size_callback(width, height);
-	}
+	};
 
 	static void mouse_button_callback(GLFWwindow* window, int button, int action, int mods) {
 		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
 		renderer->mouse_button_callback(button, action, mods);
-	}
+	};
+
+	//glfwSetDropCallback(window, drop_callback);
+	//void drop_callback(GLFWwindow* window, int count, const char** paths)
 
 	void updateCam(glm::mat4 update);
 

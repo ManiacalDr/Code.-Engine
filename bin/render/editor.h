@@ -8,8 +8,14 @@ class Editor
 public:
 	Editor();
 	~Editor();
+	//std::vector<Object*> objects;
 	Object* selection;
 	Object* editable;
+	Scene* scene;
+
+	void setScene(Scene* scn) {
+		scene = scn;
+	};
 
 	void makeSelection(Object* sel) { selection = sel; removeEditable(); }
 	void makeEditable(Object* edt) { editable = edt; removeSelection(); }
