@@ -8,25 +8,22 @@
 #include "object.hpp"
 #include <box2d/box2d.h>
 
-
+///Unused contact listener, in future this would control when two objects connect what to do.
 class MyContactListener : public b2ContactListener
 {
 	void BeginContact(b2Contact* contact) {
 
-		//check if fixture A was a ball
 		b2BodyUserData a = contact->GetFixtureA()->GetBody()->GetUserData();
-		//if (auser.pointer)
-			//spriteData* a = (auser.pointer;
-
-		//check if fixture B was a ball
+	
 		b2BodyUserData b = contact->GetFixtureB()->GetBody()->GetUserData();
-		//if (bodyUserData)
-			//static_cast<Ball*>(bodyUserData)->startContact();
+
 		std::cout << a.pointer << " " << b.pointer;
 
 	}
 };
 
+// Scene class, stores everything neccessary for the scene, including seperted clickable objects, sprites, ans where the player starts in a scene.
+// Also is responsible for the Collision model
 class Scene
 {
 public:
@@ -39,12 +36,9 @@ public:
 	glm::vec3 playerStart = glm::vec3(0.0f);
 
 	Scene();
-	~Scene();
+	~Scene() {};
 
 	void worldStep();
-
-	void processFile(const std::string file);
-	void writeFile(const std::string file);
 
 	void saveSprites(const std::string file);
 

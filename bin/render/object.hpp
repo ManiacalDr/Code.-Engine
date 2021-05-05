@@ -1,3 +1,4 @@
+//Made by Gregory Watts
 #ifndef OBJECT_HPP
 #define OBJECT_HPP
 #include <memory>
@@ -7,6 +8,8 @@
 #include <glm/ext.hpp>
 #include<GL/glu.h>
 
+/// Base object class which in future could be used to sotre seperate objects in a data structe
+/// Curretnly this only seperates world posistion data from sprite data
 class Object
 {
 public:
@@ -26,13 +29,10 @@ public:
 	glm::mat4 rotate(float r) { return glm::rotate(glm::mat4(1.0f), glm::radians(r), glm::vec3(0.0f, 0.0f, 1.0f)); }
 	glm::mat4 scale(glm::vec3 s) { return glm::scale(glm::mat4(1.0f), s); }
 
+	// While this isnt techincally used, Object needs a virtual function to act porperly as a base class.
 	void virtual addLink(Object o) {
-		//link.emplace_back(new Object(o));
+		
 	}
-	std::string virtual writeJSON() {
-		return "";
-	}
-
 
 private:
 	

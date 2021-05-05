@@ -4,6 +4,7 @@
 #include "render/editor.h"
 #include "collision/collision.hpp"
 
+/// Helper funciton to load in Animations when appropriate.
 void makeAnimation(Scene* scene, float xpos, float ypos, boost::filesystem::directory_entry& entry)
 {
 	Sprite* tmp;
@@ -30,6 +31,7 @@ int main() {
 	int id = 01;
 
 	do {
+		//Makes changes based on what render mode we are currently in
 		if (mode != renderer.getMode()) {
 			mode = renderer.getMode();
 			Object* tmp;
@@ -83,10 +85,10 @@ int main() {
 			}
 		}
 
-
-		//scene.update();
+		//Render out the current scene
 		renderer.render(&scene);
 
+		//Render/make changes based on what mode we are in. 
 		switch (mode)
 		{
 		case RenderMode::NONE:

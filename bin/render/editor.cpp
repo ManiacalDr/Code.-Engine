@@ -3,14 +3,9 @@
 #include "imgui.h"
 #include "sprite.h"
 
-Editor::Editor()
-{
-}
 
-Editor::~Editor()
-{
-}
-
+/// Renders out ImGui components when an editable sprite is selected.
+/// Edited heavily by Michael to add animations edits.
 void Editor::render()
 {
 	Sprite* mysprite = (Sprite*)editable;
@@ -20,8 +15,6 @@ void Editor::render()
 	bool player = false;
 	bool enemy = false;
 
-	if (mysprite != nullptr)
-		enemy = mysprite->data.isEnemy;
 
 	int uvSetx = 318;
 	int uvSety = 424;//Size of total picture
@@ -29,7 +22,7 @@ void Editor::render()
 	int frameSizey = 106;//Size of each frame. Later is frame/uv to get the Uv coords
 	int frames = 12;//Default UV options for dragon
 
-	if (editable != NULL) {
+	if (editable != nullptr) {
 		ImGui::Begin("Edit Sprite");
 		//ImGui::SliderFloat3("Position", position, -10000, 10000);
 		ImGui::InputFloat("position x", &editable->position.x);
@@ -87,7 +80,7 @@ void Editor::render()
 			mysprite->makePlayer(scene);
 		}
 	if (enemy) {
-		if(mysprite->data.isEnemy == false)
+		//if(mysprite->data.isEnemy == false)
 			mysprite->makeEnemy(scene);
 	}
 }

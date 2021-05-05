@@ -27,6 +27,7 @@
 #include FT_FREETYPE_H
 #define reportError(s) _ReportError(__LINE__, (s))
 
+// Enum for the purpose of storing the current render mode, and allowing for switch statments based on the mode. 
 enum class RenderMode {
 	NONE,
 	GAME,
@@ -34,6 +35,7 @@ enum class RenderMode {
 	MENU
 };
 
+// Struct to store approprite data of a single character in a font
 struct Character {
 	unsigned int TextureID;  // ID handle of the glyph texture
 	glm::ivec2   Size;       // Size of glyph
@@ -126,9 +128,6 @@ private:
 		Renderer* renderer = static_cast<Renderer*>(glfwGetWindowUserPointer(window));
 		renderer->mouse_button_callback(button, action, mods);
 	};
-
-	//glfwSetDropCallback(window, drop_callback);
-	//void drop_callback(GLFWwindow* window, int count, const char** paths)
 
 	void updateCam(glm::mat4 update);
 

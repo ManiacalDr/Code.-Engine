@@ -1,3 +1,4 @@
+//Made by Michael Alcala
 #ifndef COLLISION_H
 #define COLLISION_H
 
@@ -6,12 +7,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <Box2D/Box2D.h>
- 
-struct spriteData {
-	bool isPlayer = false;
-	bool isEnemy = false;
-};
 
+/// Collision class to store values necessary for creating colliders inside of the collision model.
 class Collision {
 public:
 	Collision() {};
@@ -22,7 +19,7 @@ public:
 	const float M2P = 32;
 	const float P2M = 1 / M2P;
 
-
+	/// This function sets up the physics body inside of the curretnly loaded scene.
 	b2Body* addRect(Scene* scene, int x, int y, int w, int h, bool dyn = true)//Creates world where box colliders live
 	{
 		b2BodyDef bodydef;

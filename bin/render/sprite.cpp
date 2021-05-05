@@ -28,16 +28,10 @@
 #include "scene.h"
 #include <time.h>
 
+// added by Matthew
 Playaudio currentlyplaying;
 
-Sprite::Sprite() {
-
-}
-
-Sprite::~Sprite() {
-
-}
-
+// Constructor for a sprite
 Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 
@@ -47,18 +41,6 @@ Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s,
 	glBindTexture(GL_TEXTURE_2D, texture);
 	int width, height, nrChannels;
 
-	//unsigned char* data = stbi_load("assets/textures/entities/failed.jpg", &width, &height, &nrChannels, 4);
-
-	//if (data)
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-	//else
-	//{
-	//	std::cout << "Failed to load texture" << std::endl;
-	//}
-
 	unsigned char* data = stbi_load(t.c_str(), &width, &height, &nrChannels, 4);
 
 	if (data)
@@ -73,6 +55,7 @@ Sprite::Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s,
 	stbi_image_free(data);
 }
 
+// Another constructor for a sprite
 Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 
@@ -82,18 +65,6 @@ Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double
 	glBindTexture(GL_TEXTURE_2D, texture);
 	int width, height, nrChannels;
 
-	//unsigned char* data = stbi_load("assets/textures/entities/failed.jpg", &width, &height, &nrChannels, 3);
-
-	//if (data)
-	//{
-	//	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
-	//	glGenerateMipmap(GL_TEXTURE_2D);
-	//}
-	//else
-	//{
-	//	std::cout << "Failed to load texture" << std::endl;
-	//}
-
 	unsigned char* data = stbi_load(t.c_str(), &width, &height, &nrChannels, 4);
 
 	if (data)
@@ -108,6 +79,7 @@ Sprite::Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double
 	stbi_image_free(data);
 }
 
+// Sprite contructor that copies over a sprite that already has a texture loaded.
 Sprite::Sprite(bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, double r, glm::vec3 s, std::string i) : Object(p, r, s, i) {
 	name = n;
 	texture = t;
@@ -115,12 +87,13 @@ Sprite::Sprite(bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, do
 
 }
 
+// add a collider to a sprite, and to the scene, passes in wether it is active or not. added by Michael
 void Sprite::addCollider(bool dyn, Scene* scene)
 {
-
 	collider = collision.addRect(scene, this->position.x,this->position.y,this->scaleValue.x,this->scaleValue.y, dyn);
 }
 
+// sets the UV for sprites with animations, and need to store multiple UV's for each frame of the animation. Added by Michael
 void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize) {
 	UV = new glm::mat4x2[frames];
 	glm::vec2 first = start;
@@ -145,11 +118,13 @@ void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSi
 	curFrame = UV[0];
 }
 
+// Sets which frame is the current frame of an animation. Added by Michael
 void Sprite::setCurFrame(int frame)
 {
 	curFrame = UV[frame];
 }
 
+// Sets which frames are part of an animation. Added by Michael
 void Sprite::setAnimation(std::string animationName,int frames[], int frameSize)//adds all the frames from the number in frames[i]
 {
 	animationList[animationName] = new glm::mat4x2[frameSize];
@@ -159,6 +134,7 @@ void Sprite::setAnimation(std::string animationName,int frames[], int frameSize)
 	}
 }
 
+// Starts playing a specific animation. Added by Michael
 void Sprite::startAnimation(std::string animationName, int size)
 {
 	if (UV != nullptr)
@@ -175,6 +151,7 @@ void Sprite::startAnimation(std::string animationName, int size)
 	}
 }
 
+// Translates the sprite to the location of the collider inside the collision model. Added by Michael
 void Sprite::colliderTranslate()
 {
 	if (collider != nullptr)
@@ -185,6 +162,7 @@ void Sprite::colliderTranslate()
 	}
 }
 
+// If necessary moves the collider to where the sprite is located on screne. Added by Michael
 void Sprite::spriteTranslate()
 {
 	if (collider != nullptr)
@@ -193,17 +171,19 @@ void Sprite::spriteTranslate()
 	}
 }
 
+// Makes this sprite the player sprite inside of a selected scene. 
 void Sprite::makePlayer(Scene* scene)
 {
-	data.isPlayer = true;
 	scene->playerSprite = this;
 }
 
+// This funciton would be used to make this sprite an enemy in a scene.
 void Sprite::makeEnemy(Scene* scene)
 {
-	data.isEnemy = true;
+	
 }
 
+// This function dictates what happens when players hit specific keys to move the player. Added by Michael
 void Sprite::playerControl(std::string key)
 {
 	if (key == "W")

@@ -9,7 +9,8 @@
 #include "../collision/collision.hpp"
 #include <map>
 
-
+// Sprite class, sotres all of the necessary information in the sprite, and inherits 
+// object for world information. 
 class Sprite : public Object
 {
 public:
@@ -20,7 +21,6 @@ public:
 	glm::mat4x2 curFrame;//Is either the defaultUV or the current frame of UV
 	std::map<std::string, glm::mat4x2* > animationList;//Stores animation names and frames together
 	bool animating = false;
-	spriteData data;
 	int frame = 0;
 	GLuint texture;
 	Collision collision;
@@ -31,8 +31,8 @@ public:
 	const float fps = 5;
 	int fpsCount = 0;
 
-	Sprite();
-	~Sprite();
+	Sprite() {};
+
 	Sprite(std::string n) { name = n; }
 	Sprite(std::string n, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
 	Sprite(std::string n, glm::mat4x2 uv, std::string t, glm::vec3 p, double r, glm::vec3 s, std::string i);
@@ -52,9 +52,9 @@ public:
 	void makeEnemy(Scene*);
 	void playerControl(std::string);//Move player
 
+	// Used for the purpose of debugging
 	void print() {
 		std::cout << name << " " << position.x << " " << position.y << " " << position.z << std::endl;
-		
 	};
 
 private:

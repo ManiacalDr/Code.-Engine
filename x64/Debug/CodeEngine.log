@@ -1,55 +1,29 @@
 ﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\main.cpp(10,7): warning C4101: 'tmpFrames': unreferenced local variable
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\main.cpp(11,7): warning C4101: 'tmpFrames': unreferenced local variable
   editor.cpp
   renderer.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(412,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\renderer.cpp(423,24): warning C4838: conversion from 'FT_Pos' to 'unsigned int' requires a narrowing conversion
   scene.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\shared\minwindef.h(130,1): warning C4005: 'APIENTRY': macro redefinition
 C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\drivers\include\GLFW\glfw3.h(123): message : see previous definition of 'APIENTRY'
 C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(21,39): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(29,28): warning C4305: 'argument': truncation from 'double' to 'float'
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(138,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(30,28): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(122,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(140,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(124,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(142,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
+C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\scene.cpp(126,27): warning C4244: '=': conversion from 'int' to 'T', possible loss of data
           with
           [
               T=float
           ]
-  sprite.cpp
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(41,109): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(76,125): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(111,129): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(121,107): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(121,88): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(121,69): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(121,52): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(184,41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\bin\render\sprite.cpp(192,97): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
   Generating Code...
   CodeEngine.vcxproj -> C:\MinGW\msys\1.0\home\ManiacalDrWatts\Code.-Engine\x64\Debug\CodeEngine.exe

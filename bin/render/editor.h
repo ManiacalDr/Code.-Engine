@@ -1,16 +1,17 @@
+//Made by Gregory Watts
 #ifndef EDITOR_H
 #define EDITOR_H
 #include "object.hpp"
 #include "sprite.h"
 
+/// Editor class, stores the currently selected sprite/editabale sprite. 
+/// Also stores the current scene.
 class Editor
 {
 public:
-	Editor();
-	~Editor();
-	//std::vector<Object*> objects;
-	Object* selection;
-	Object* editable;
+	
+	Object* selection = nullptr;
+	Object* editable = nullptr;
 	Scene* scene;
 
 	void setScene(Scene* scn) {

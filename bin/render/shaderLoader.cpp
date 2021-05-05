@@ -1,3 +1,6 @@
+//This was not written by us, but unfortunitly I (Gregory) do not have the link to the original place I got this from
+//I have used it for a number of similar projects.
+
 #include <stdio.h>
 #include <string>
 #include <vector>

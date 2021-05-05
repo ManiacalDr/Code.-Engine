@@ -15,7 +15,7 @@
 #include "stb_image.h"
 #include <box2d/box2d.h>
 
-
+/// Scene constructor function
 Scene::Scene()
 {
 	world = new b2World(b2Vec2(0.0, -5.81));
@@ -24,17 +24,14 @@ Scene::Scene()
 	world->SetContactListener(contactListener);
 }
 
+/// Collision worldStep call
 void Scene::worldStep()
 {
 	world->Step(1.0 / 60, 8, 3);
 }
 
-Scene::~Scene()
-{
-	
-}
-
-//Save the Sprites vector
+/// Function used to save sprites to file. Also stores player starts and sets up a header 
+/// to correctly load in textures
 void Scene::saveSprites(const std::string file)
 {
 	//Open file specifed in arguments
@@ -75,7 +72,6 @@ void Scene::saveSprites(const std::string file)
 		}
 	}
 	//End console line and reset temp head and uniques
-	//Maybe add a "end of names" line, so reading is easier
 	output << "endofnames" << std::endl;
 	//std::cout << std::endl;
 
@@ -84,40 +80,29 @@ void Scene::saveSprites(const std::string file)
 	{
 		Sprite* temp = dynamic_cast<Sprite*>(sprites[i]);
 		
-		
-
-			//Save each variable, each variable separated by a new line
-			//Comment out whatever isn't needed, I'm sure some of this stuff can be initialized when reading file
+		//Save each variable, each variable separated by a new line
 		output << std::endl << temp->name << std::endl;
-			output << temp->position.x << std::endl << temp->position.y << std::endl << temp->position.z << std::endl;
-			output << temp->rotation << std::endl;
-			output << temp->scaleValue.x << std::endl << temp->scaleValue.y << std::endl << temp->scaleValue.z << std::endl;
-			output << temp->ID << std::endl;
-			//whatever defaultUV is
-			output << temp->color.x << std::endl << temp->color.y << std::endl << temp->color.z << std::endl << temp->color.w << std::endl;
-			//Animation
-			//if (!temp->animating)
-				//output << -1 << std::endl;
-			//else
-				//output << temp->animating << std::endl;
-			//output << temp->frame;
-			//no clue about texture, collider, or scene
-			if (temp->collider != nullptr) {
-				if (temp->collider->GetType() == b2_dynamicBody)
-					output << std::to_string(1);
-				else
-					output << std::to_string(2);
-			}
+		output << temp->position.x << std::endl << temp->position.y << std::endl << temp->position.z << std::endl;
+		output << temp->rotation << std::endl;
+		output << temp->scaleValue.x << std::endl << temp->scaleValue.y << std::endl << temp->scaleValue.z << std::endl;
+		output << temp->ID << std::endl;
+		output << temp->color.x << std::endl << temp->color.y << std::endl << temp->color.z << std::endl << temp->color.w << std::endl;
+			
+		if (temp->collider != nullptr) {
+			if (temp->collider->GetType() == b2_dynamicBody)
+				output << std::to_string(1);
 			else
-				output << std::to_string(-1);
-
-		
+				output << std::to_string(2);
+		}
+		else
+			output << std::to_string(-1);
 	}
 
 	output.close();
 }
 
-//Read sprites from file
+/// Function to read in scene files, sets up the scene, loads in texturs only once, and 
+/// sets up colliders if it has one
 void Scene::readSprites(const std::string file)
 {
 	//Input variable, open file from argument
@@ -125,7 +110,6 @@ void Scene::readSprites(const std::string file)
 	input.open(file, std::ios_base::in);
 
 	//Create a temp from the root object
-	//Maybe make a new sprite completely to add stuff to? not entirely sure
 	Sprite* temp;
 
 	//Input string, along with a section flag to determine if on names or other vars
@@ -173,18 +157,13 @@ void Scene::readSprites(const std::string file)
 		else if (secFlag == 0)
 		{
 			secFlag = 1;
-			//Reset temp to first variable, although I'm positive this is messed up
-			//Because in the previous step, we change the name
-
-			//temp = dynamic_cast<Sprite*>(root);
 		}
 		//Starting at the first sprite, add all the other variables to them
 		else //part 2
 		{
 			temp = new Sprite();
 			temp->name = inpStr;
-			//I think this should work
-			//Comment out whatever isn't needed, I'm sure some of this stuff can be initialized when reading file
+			
 			input >> inpStr;
 			temp->position.x = std::stof(inpStr);
 			input >> inpStr; 
@@ -208,17 +187,8 @@ void Scene::readSprites(const std::string file)
 			temp->color.z = std::stof(inpStr); 
 			input >> inpStr;
 			temp->color.w = std::stof(inpStr);
-			//same thing with UV and curFrame, I have no clue how these are set upper_bound
-			
-			//input >> inpStr;
-			//if (std::stoi(inpStr) == -1)
-				//temp->animating = 0;
-			//else
-				//temp->animating = std::stoi(inpStr);
-			//input >> inpStr;
-			//temp->frame = 0;
+		
 			input >> inpStr;
-			//std::cout << inpStr;
 			int ifCollision = std::stoi(inpStr);
 			if (ifCollision != -1) {
 				if (ifCollision == 1)

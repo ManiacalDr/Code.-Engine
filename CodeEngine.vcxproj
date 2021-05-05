@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bin\animation\AnimationNotes.cpp" />
-    <ClCompile Include="bin\animation\Animator.cpp" />
     <ClCompile Include="bin\main.cpp" />
     <ClCompile Include="bin\render\editor.cpp" />
     <ClCompile Include="bin\render\imgui.cpp" />

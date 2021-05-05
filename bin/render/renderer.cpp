@@ -9,6 +9,7 @@
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
 
+/// Helper function to report OpenGL errors
 void _ReportError(int ln, const std::string str) {
 	GLuint err = glGetError();
 	if (!err) return;
@@ -16,10 +17,12 @@ void _ReportError(int ln, const std::string str) {
 	printf("\n******************************************\n%d: %s: GLError %d: %s\n", ln, str.c_str(), err, glerr);
 }
 
+/// Defines the error callback
 void glfwErrorCB(int error, const char* description) {
 	fputs(description, stderr);
 }
 
+/// Defines the Keyboard callback in OpenGL
 void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 	static float speed = 1.0;
 	Object* sprite = new Object();
@@ -129,6 +132,7 @@ void Renderer::KeyboardCB(int key, int scancode, int action, int mods) {
 	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
 }
 
+/// Defines the mouse callback for OpenGL
 void Renderer::mouse_button_callback(int button, int action, int mods) {
 	static float layer = 0.0;
 	bool spriteHit = false, objHit = false;
@@ -245,15 +249,19 @@ void Renderer::mouse_button_callback(int button, int action, int mods) {
 	}
 }
 
+/// Defines what should happen when the frame changes sizes. 
+/// Is not currently used due to it causing issues in the editor.
 void Renderer::framebuffer_size_callback(int width, int height) {
 	// make sure the viewport matches the new window dimensions; note that width and 
 	// height will be significantly larger than specified on retina displays.
-	glViewport(0, 0, width, height);
+	// glViewport(0, 0, width, height);
 	p = glm::ortho(-(width / 2.0f), width / 2.0f,
 		-(height / 2.0f), (height / 2.0f),
 		-1000.0f, 1000.0f);
 }
 
+/// Initializes the renderer, setting up VBO's, VAO's, shaders
+/// and attribute locations inside the shaders.
 void Renderer::initialize() {
 
 	glGenVertexArrays(1, &VAO);
@@ -303,12 +311,15 @@ void Renderer::initialize() {
 	reportError("init");
 }
 
+/// Function to change the camera location based on a transfromation matrix.
 void Renderer::updateCam(glm::mat4 update)
 {
 	cam = glm::vec3(update * glm::vec4(cam,1.0f));
 	v = lookAt(cam, glm::vec3(cam.x, cam.y, -(cam.z + 10)), glm::vec3(0.0, 1.0, 0.0));
 }
 
+/// The Renderer constructor, sets up the OpenGL window, the text portion of the renderer,
+/// calls initilize and sets up ImGui context
 Renderer::Renderer()
 {
 	// Initialise GLFW
@@ -467,6 +478,8 @@ Renderer::Renderer()
 	reportError("First");
 }
 
+/// We used a seperate shader for rendering text, this fuction is responsible for swtiching shaders and correctly rendering dynamic
+/// text on screen.
 void Renderer::RenderText(std::string text, float x, float y, float scale, glm::vec3 color)
 {
 	// activate corresponding render state	
@@ -512,6 +525,8 @@ void Renderer::RenderText(std::string text, float x, float y, float scale, glm::
 	glUseProgram(ProgramID);
 }
 
+/// This function is used to render a frame of the current scene. Also renders elements according 
+/// to render mode.
 void Renderer::render(Scene* scene) {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -580,14 +595,10 @@ void Renderer::render(Scene* scene) {
 		RenderText("hit R to reset camera", 210.0f, 322.0f - val*3, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
 		RenderText("hit G to switch between game and editor", 210.0f, 322.0f - val*4, 0.25f, glm::vec3(0.3, 0.7f, 0.9f));
 
-		//glViewport(0, 0, 1080, 250);
-		//glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
 
-		//ImGui::Text("Hello, world %d", 123);
 		if (ImGui::Button("Save")) {
 			int size = sizeof(buf) / sizeof(char);
 			int i;
@@ -626,6 +637,7 @@ void Renderer::render(Scene* scene) {
 	//reportError("render");
 }
 
+/// Helper funciton to appropriatly move player in the scene. 
 void Renderer::playerMove(std::string key)
 {
 	if (scene->playerSprite != nullptr)
@@ -636,6 +648,7 @@ void Renderer::playerMove(std::string key)
 
 }
 
+/// Renderer destructor call, deletes buffers and programs.
 Renderer::~Renderer()
 {
 	// Cleanup VBO
@@ -653,6 +666,6 @@ Renderer::~Renderer()
 	ImGui::DestroyContext();
 
 	// Close OpenGL window and terminate GLFW
-	//glfwTerminate();
+	glfwTerminate();
 	reportError("clean");
 }

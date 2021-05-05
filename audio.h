@@ -1,3 +1,5 @@
+//Made by Matthew Buehring
+
 #pragma once
 #ifndef audio_H
 #define audio_H
@@ -10,7 +12,6 @@
 
 class Playaudio
 {
-
   public:
 
 	  void DragonRoar()
@@ -22,8 +23,6 @@ class Playaudio
 	  {
 		  PlaySound(TEXT("assets\\audio\\footstepsDragon.wav"), NULL, SND_SYNC);
 	  }
-
-	 
 
 	  void RainBird()
 	  {
@@ -48,14 +47,12 @@ class Playaudio
 		  PlaySound(TEXT("assets\\audio\\RainStorm.wav"), NULL, SND_SYNC);
 
 	  }
+
 	  void ThunderStorm()
 	  {
 		  PlaySound(TEXT("assets\\audio\\ThunderStorm.wav"), NULL, SND_SYNC);
 
 	  }
-
-
-
 
 };
 #endif
