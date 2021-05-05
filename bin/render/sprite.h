@@ -9,6 +9,7 @@
 #include "../collision/collision.hpp"
 #include <map>
 
+
 class Sprite : public Object
 {
 public:
@@ -19,6 +20,7 @@ public:
 	glm::mat4x2 curFrame;//Is either the defaultUV or the current frame of UV
 	std::map<std::string, glm::mat4x2* > animationList;//Stores animation names and frames together
 	bool animating = false;
+	spriteData data;
 	int frame = 0;
 	GLuint texture;
 	Collision collision;

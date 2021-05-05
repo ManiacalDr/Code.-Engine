@@ -3,8 +3,6 @@
 #include "render/scene.h"
 #include "render/editor.h"
 #include "collision/collision.hpp"
-#include "main.h"
-
 
 void makeAnimation(Scene* scene, float xpos, float ypos, boost::filesystem::directory_entry& entry)
 {
@@ -94,7 +92,6 @@ int main() {
 		case RenderMode::NONE:
 			break;
 		case RenderMode::GAME:
-			//std::cout << std::endl << scene.playerSprite->position.x << " " << scene.playerSprite->position.y << std::endl;
 			scene.worldStep();
 			break;
 		case RenderMode::EDITOR:

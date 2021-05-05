@@ -20,6 +20,8 @@ Scene::Scene()
 {
 	world = new b2World(b2Vec2(0.0, -5.81));
 	void worldStep();
+	contactListener = new MyContactListener();
+	world->SetContactListener(contactListener);
 }
 
 void Scene::worldStep()
@@ -75,7 +77,7 @@ void Scene::saveSprites(const std::string file)
 	//End console line and reset temp head and uniques
 	//Maybe add a "end of names" line, so reading is easier
 	output << "endofnames" << std::endl;
-	std::cout << std::endl;
+	//std::cout << std::endl;
 
 	//Run through sprites list to collect rest of variables
 	for (int i = 0; i < sprites.size(); i++)
@@ -92,14 +94,22 @@ void Scene::saveSprites(const std::string file)
 			output << temp->scaleValue.x << std::endl << temp->scaleValue.y << std::endl << temp->scaleValue.z << std::endl;
 			output << temp->ID << std::endl;
 			//whatever defaultUV is
-			output << std::endl << temp->color.x << std::endl << temp->color.y << std::endl << temp->color.z << std::endl << temp->color.w;
-			//same thing with UV and curFrame, I have no clue how these are set upper_bound
-			if (!temp->animating)
-				output << -1 << std::endl;
-			else
-				output << temp->animating << std::endl;
+			output << temp->color.x << std::endl << temp->color.y << std::endl << temp->color.z << std::endl << temp->color.w << std::endl;
+			//Animation
+			//if (!temp->animating)
+				//output << -1 << std::endl;
+			//else
+				//output << temp->animating << std::endl;
 			//output << temp->frame;
 			//no clue about texture, collider, or scene
+			if (temp->collider != nullptr) {
+				if (temp->collider->GetType() == b2_dynamicBody)
+					output << std::to_string(1);
+				else
+					output << std::to_string(2);
+			}
+			else
+				output << std::to_string(-1);
 
 		
 	}
@@ -116,7 +126,7 @@ void Scene::readSprites(const std::string file)
 
 	//Create a temp from the root object
 	//Maybe make a new sprite completely to add stuff to? not entirely sure
-	Sprite* temp = new Sprite();
+	Sprite* temp;
 
 	//Input string, along with a section flag to determine if on names or other vars
 	std::string inpStr;
@@ -171,6 +181,7 @@ void Scene::readSprites(const std::string file)
 		//Starting at the first sprite, add all the other variables to them
 		else //part 2
 		{
+			temp = new Sprite();
 			temp->name = inpStr;
 			//I think this should work
 			//Comment out whatever isn't needed, I'm sure some of this stuff can be initialized when reading file
@@ -198,15 +209,41 @@ void Scene::readSprites(const std::string file)
 			input >> inpStr;
 			temp->color.w = std::stof(inpStr);
 			//same thing with UV and curFrame, I have no clue how these are set upper_bound
-			temp->curFrame = glm::mat4x2(temp->defaultUV);
-			temp->UV = new glm::mat4x2(temp->defaultUV);
+			
 			//input >> inpStr;
-			if (std::stoi(inpStr) == -1)
-				temp->animating = 0;
-			else
-				temp->animating = std::stoi(inpStr);
+			//if (std::stoi(inpStr) == -1)
+				//temp->animating = 0;
+			//else
+				//temp->animating = std::stoi(inpStr);
 			//input >> inpStr;
-			temp->frame = 0;
+			//temp->frame = 0;
+			input >> inpStr;
+			//std::cout << inpStr;
+			int ifCollision = std::stoi(inpStr);
+			if (ifCollision != -1) {
+				if (ifCollision == 1)
+					temp->addCollider(true, this);
+				else if(ifCollision == 2)
+					temp->addCollider(false, this);
+			}
+
+			if (temp->ID == "PlayerSprite") {
+				temp->makePlayer(this);
+				temp->setUV(glm::vec2(0, 0), glm::vec2(318, 424), 12, glm::vec2(106, 106));
+				int* tmpFrames = new int[3]{ 0,1,2 };
+				temp->setAnimation("downWalk", tmpFrames, 3);
+				tmpFrames = new int[3]{ 3,4,5 };
+				temp->setAnimation("leftWalk", tmpFrames, 3);
+				tmpFrames = new int[3]{ 6,7,8 };
+				temp->setAnimation("rightWalk", tmpFrames, 3);
+				tmpFrames = new int[3]{ 9,10,11 };
+				temp->setAnimation("upWalk", tmpFrames, 3);
+				temp->animating = true;
+			}
+			else {
+				temp->curFrame = glm::mat4x2(temp->defaultUV);
+				temp->UV = new glm::mat4x2(temp->defaultUV);
+			}
 			
 			int place = 0;
 			for (auto i = temppath.begin(); i != temppath.end(); i++) {
@@ -215,9 +252,8 @@ void Scene::readSprites(const std::string file)
 				place++;
 			}
 
-			//Move onto next sprite
-					temp->print();
-			sprites.emplace_back(new Sprite(*temp));
+			temp->print();
+			sprites.emplace_back(temp);
 		}
 	}
 	//Tuck the file into bed

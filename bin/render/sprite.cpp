@@ -118,7 +118,7 @@ Sprite::Sprite(bool dyn,std::string n, glm::mat4x2 uv, GLuint t, glm::vec3 p, do
 void Sprite::addCollider(bool dyn, Scene* scene)
 {
 
-	collider = collision.addRect(scene,this->position.x,this->position.y,this->scaleValue.x,this->scaleValue.y,dyn);
+	collider = collision.addRect(scene, this->position.x,this->position.y,this->scaleValue.x,this->scaleValue.y, dyn);
 }
 
 void Sprite::setUV(glm::vec2 start, glm::vec2 end, int frames, glm::vec2 frameSize) {
@@ -195,12 +195,13 @@ void Sprite::spriteTranslate()
 
 void Sprite::makePlayer(Scene* scene)
 {
+	data.isPlayer = true;
 	scene->playerSprite = this;
 }
 
 void Sprite::makeEnemy(Scene* scene)
 {
-	scene->enemies.emplace_back(this);
+	data.isEnemy = true;
 }
 
 void Sprite::playerControl(std::string key)
@@ -211,7 +212,7 @@ void Sprite::playerControl(std::string key)
 		{
 			this->position = glm::vec3(position.x, position.y + 5, position.z);
 			startAnimation("upWalk", 3);
-			currentlyplaying.DragonSteps();
+			currentlyplaying.DragonRoar();
 		}
 		else
 		{
@@ -223,7 +224,7 @@ void Sprite::playerControl(std::string key)
 	{
 		this->position = glm::vec3(position.x-5, position.y, position.z);
 		startAnimation("leftWalk", 3);
-		currentlyplaying.DragonSteps();
+		currentlyplaying.DragonRoar();
 	}
 	else if (key == "S")
 	{
@@ -231,7 +232,7 @@ void Sprite::playerControl(std::string key)
 		{
 			this->position = glm::vec3(position.x, position.y - 5, position.z);
 			startAnimation("downWalk", 3);
-			currentlyplaying.DragonSteps();
+			currentlyplaying.DragonRoar();
 		}
 
 	}
@@ -239,7 +240,7 @@ void Sprite::playerControl(std::string key)
 	{
 		this->position = glm::vec3(position.x+5, position.y, position.z);
 		startAnimation("rightWalk", 3);
-		currentlyplaying.DragonSteps();
+		currentlyplaying.DragonRoar();
 	}
 
 	

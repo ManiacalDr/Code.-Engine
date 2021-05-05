@@ -10,7 +10,6 @@
 class Object
 {
 public:
-	std::vector<Object*> link;
 	glm::vec3 position;
 	float rotation;
 	glm::vec3 scaleValue;
@@ -27,14 +26,13 @@ public:
 	glm::mat4 rotate(float r) { return glm::rotate(glm::mat4(1.0f), glm::radians(r), glm::vec3(0.0f, 0.0f, 1.0f)); }
 	glm::mat4 scale(glm::vec3 s) { return glm::scale(glm::mat4(1.0f), s); }
 
-
 	void virtual addLink(Object o) {
-		link.emplace_back(new Object(o));
+		//link.emplace_back(new Object(o));
 	}
-
 	std::string virtual writeJSON() {
 		return "";
 	}
+
 
 private:
 	

@@ -1,12 +1,16 @@
+#ifndef COLLISION_H
+#define COLLISION_H
+
 #include "scene.h"
 #include <iostream>
-#include "scene.h"
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <Box2D/Box2D.h>
-
-#ifndef COLLISION_H
-#define COLLISION_H
+ 
+struct spriteData {
+	bool isPlayer = false;
+	bool isEnemy = false;
+};
 
 class Collision {
 public:

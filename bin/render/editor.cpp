@@ -1,3 +1,4 @@
+
 #include "editor.h"
 #include "imgui.h"
 #include "sprite.h"
@@ -17,6 +18,10 @@ void Editor::render()
 	bool passive = false;
 	bool spriteSheet = false;
 	bool player = false;
+	bool enemy = false;
+
+	if (mysprite != nullptr)
+		enemy = mysprite->data.isEnemy;
 
 	int uvSetx = 318;
 	int uvSety = 424;//Size of total picture
@@ -34,6 +39,7 @@ void Editor::render()
 		ImGui::InputFloat("scale x", &editable->scaleValue.x);
 		ImGui::InputFloat("scale y", &editable->scaleValue.y);
 		//editable->position = glm::vec3(position[0], position[1], position[2]);
+		ImGui::Checkbox("Make enemy", &enemy);
 		if (mysprite->collider==nullptr)//Shows tabs for Active or Passive Collider. Active is moving, while Passive is not.
 		{
 			ImGui::Checkbox("addActiveCollider", &active);
@@ -77,6 +83,11 @@ void Editor::render()
 	if(mysprite!=nullptr)//Makes sprite Player
 		if (player && scene->playerSprite != mysprite)
 		{
+			mysprite->ID = "PlayerSprite";
 			mysprite->makePlayer(scene);
 		}
+	if (enemy) {
+		if(mysprite->data.isEnemy == false)
+			mysprite->makeEnemy(scene);
+	}
 }

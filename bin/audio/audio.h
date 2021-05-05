@@ -15,9 +15,8 @@ class Playaudio
 
 	  void DragonRoar()
 	  {
-		  PlaySound(TEXT("assets\\audio\\DragonRoar.wav"), NULL, SND_SYNC);
+		  PlaySound(TEXT("assets\\audio\\DragonRoar.wav"), NULL, SND_ASYNC);
 	  }
-
 
 };
 #endif
