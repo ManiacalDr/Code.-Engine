@@ -36,7 +36,6 @@
   <ItemGroup>
     <ClInclude Include="audio.h" />
     <ClInclude Include="bin\collision\collision.hpp" />
-    <ClInclude Include="bin\main.h" />
     <ClInclude Include="bin\render\editor.h" />
     <ClInclude Include="bin\render\imconfig.h" />
     <ClInclude Include="bin\render\imgui.h" />

@@ -31,7 +31,7 @@ void Scene::worldStep()
 }
 
 /// Function used to save sprites to file. Also stores player starts and sets up a header 
-/// to correctly load in textures
+/// to correctly load in textures. Added by Nathan
 void Scene::saveSprites(const std::string file)
 {
 	//Open file specifed in arguments
@@ -102,7 +102,7 @@ void Scene::saveSprites(const std::string file)
 }
 
 /// Function to read in scene files, sets up the scene, loads in texturs only once, and 
-/// sets up colliders if it has one
+/// sets up colliders if it has one. Added by Nathan
 void Scene::readSprites(const std::string file)
 {
 	//Input variable, open file from argument
